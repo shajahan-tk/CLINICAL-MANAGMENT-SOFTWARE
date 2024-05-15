@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    .main {
+        position: relative;
+        width: fit-content;
+        padding: 10px;
+        background-color: rgb(211, 212, 210);
+        height: fit-content;
+    }
+
+    .docinput {
+        width: 400px;
+        border-radius: .2rem;
+    }
+
+    .options {
+        display: flex;
+        gap: 5px;
+    }
+
+    .table {
+        position: relative;
+        width: 40%;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .tb {
+        background-color: rgb(211, 212, 210);
+        width: fit-content;
+        padding: 20px;
+        width: fit-content;
+    }
+
+    .select {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .full {
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .main2 {
+        justify-content: center;
+        gap: 20px;
+
+    }
+    input,textarea{
+        width: 200px;
+        border: unset;
+        height: 35px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="full">
+            <div class="headings" style="width: 18rem;">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa-solid fa-hospital-user"></i></i>Supplier</li>
+                        <li class="list-group-item"><i class="fa-solid fa-suitcase-medical"></i>Unit</li>
+                        <li class="list-group-item"><i class="fa-solid fa-sack-dollar"></i>Item</li>
+                        <li class="list-group-item"><i class="fa-solid fa-print"></i>Category</li>
+                        <li class="list-group-item"><i class="fa-solid fa-credit-card"></i>Manufacture</li>
+
+                    </ul>
+                </div>
+            </div>
+           
+
+
+            <div class="unit hidden" id="unit 3">
+                <div class="main2">
+                    <h5>Add Item</h5>
+                    <input type="text" placeholder="Item Name">
+                    <input type="number" placeholder="Manufacture">
+                    <input type="text" placeholder="Box Size"><br>
+                    <br>
+                    <input type="text" placeholder="Category">
+                    <input type="email" placeholder="Purchase Rate">
+                    <input type="text" placeholder="Packing Size"><br><br>
+                    <input type="number" placeholder="Taxable">
+                    <input type="number" placeholder="Recorder Quantity">
+                    <input type="number" placeholder="Is Batch No">
+                    <input type="number" placeholder="Sales Rate">
+                    <input type="number" placeholder="Device Serial Number">
+                    <input type="number" placeholder="HSN Code">
+                    <button>Save</button>
+                </div><br><br>
+                <h4>List All Items</h4>
+                <br>
+
+                <br>
+                <div class="select">
+                    <div class="options">
+                        <p><b>show</b></p>
+                        <select name="" id="" style="height: 30px; width:50px;">
+                            <option value="">10</option>
+                            <option value="">15</option>
+                            <option value="">20</option>
+                        </select>
+                        <p><b>Entries</b></p>
+                    </div>
+                    <div>
+                        <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                    </div>
+                </div>
+                <table class="table table-bordered" style="width:630px;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Item Code</th>
+                            <th>Is Batch No</th>
+                            <th>Contact Name</th>
+                            <th>Category</th>
+                            <th>Manufacture</th>
+                            <th>Unit</th>
+                            <th>Purchase Rate</th>
+                            <th>Sales Rate</th>
+                            <th>Expiry Date</th>
+                            <th>Taxable</th>
+                            <th>Device Serial Number</th>
+                            <th>Status</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

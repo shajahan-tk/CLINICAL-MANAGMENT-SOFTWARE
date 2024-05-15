@@ -1,0 +1,382 @@
+{% extends "home.html" %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    .main {
+        position: relative;
+        width: fit-content;
+        padding: 10px;
+        background-color: rgb(211, 212, 210);
+        height: fit-content;
+        
+    }
+
+    .docinput {
+        width: 400px;
+        border-radius: .2rem;
+    }
+
+    .options {
+        display: flex;
+        gap: 5px;
+    }
+
+    .table {
+        position: relative;
+        width: max-content;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .unit {
+        background-color:white;
+        border-radius: .5rem;
+        box-shadow: 0 0 20px rgb(104, 103, 103);
+        width: fit-content;
+        padding: 20px;
+
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .select {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+    .main2 {
+        justify-content: center;
+        gap: 20px;
+
+    }
+
+    input {
+        width: 200px;
+        border: unset;
+        height: 35px;
+    }
+
+    a {
+        text-decoration: none;
+        color: unset;
+    }
+
+    .list {
+        display: flex;
+        font-weight:bold ;
+    }
+
+    .full {
+        background-color: rgb(243, 241, 241);
+        padding: 20px;
+    }
+    .both{
+        display: flex;
+        gap: 20px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="full">
+            <div class="headings" style="width: 21rem;">
+            <div class="card">
+
+                <ul class="list-group list-group-flush">
+                    <div class="list">
+                        <div>
+                            <a href="" class="toggle-btn" data-target="unit1">
+                               <li class="list-group-item"> Patients</li>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="" class="toggle-btn" data-target="unit2">
+                                <li class="list-group-item"> Patient group</li>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="" class="toggle-btn" data-target="unit3">
+                                <li class="list-group-item"> Staff</li>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                </ul>
+            </div>
+            <br>
+            <div class="both">
+                <div class="unit" id="unit1">
+                    <div class="main2">
+                        <h5>Search Patient</h5>
+                        <input type="text" placeholder="Search Patient">
+                        <select name="" id="" style="width: 250px; height: 40px;">
+                            <option value="">Limit</option>
+                            <option value="1-CBC Blood Test">0-50</option>
+                            <option value="1-CBC Blood Test">0-100</option>
+                        </select>
+                        <button class="btn btn-primary">Save</button>
+                    </div><br><br>
+                    <br>
+
+                    <br>
+                    <div class="select">
+                        <div class="options">
+                            <p><b>show</b></p>
+                            <select name="" id="" style="height: 30px; width:50px;">
+                                <option value="">10</option>
+                                <option value="">15</option>
+                                <option value="">20</option>
+                            </select>
+                            <p><b>Entries</b></p>
+                        </div>
+                        <div>
+                            <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                        </div>
+                    </div>
+                    <table class="table table-bordered" style="width:900px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Registration id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Contacts</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in cmnctn %}
+                            <tr>
+                                <td><i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>&nbsp;<i
+                                        class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.Register_id}}</td>
+                                <td>{{i.First_name}}</td>
+                                <td>{{i.Mobile_no}}</td>
+                                <td>{{i.Gender}}</td>
+                                <td>{{i.Age}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="unit hidden" id="unit2">
+                    <div class="main2">
+                        <h5>Search Patient Group</h5>
+
+                        <select name="" id="" style="width: 500px; height: 40px;">
+                            <option value="">Please Select Lab Test </option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Blood Test">1-Blood Test</option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Renal Fxn Test">1-Renal Fxn Test</option>
+                        </select>
+
+                        <button class="btn btn-primary" style="position: relative; bottom: 1px;">Save</button>
+                    </div><br><br>
+                    <br>
+                    <br>
+                    <div class="select">
+                        <div class="options">
+                            <p><b>show</b></p>
+                            <select name="" id="" style="height: 30px; width:50px;">
+                                <option value="">10</option>
+                                <option value="">15</option>
+                                <option value="">20</option>
+                            </select>
+                            <p><b>Entries</b></p>
+                        </div>
+                        <div>
+                            <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                        </div>
+                    </div>
+                    <table class="table table-bordered" style="width:900px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Registration id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Contacts</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in cmnctn %}
+                            <tr>
+                                <td><i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>&nbsp;<i
+                                        class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.Register_id}}</td>
+                                <td>{{i.First_name}}</td>
+                                <td>{{i.Mobile_no}}</td>
+                                <td>{{i.Gender}}</td>
+                                <td>{{i.Age}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="unit hidden" id="unit3">
+                    <div class="main2">
+                        <h5>Search Staff</h5>
+                        <select name="" id="" style="width: 500px; height: 40px;">
+                            <option value="">Please Select Lab Test </option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Blood Test">1-Blood Test</option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Renal Fxn Test">1-Renal Fxn Test</option>
+                        </select>
+                        <button class="btn btn-primary" style="position: relative; bottom: 1px;">Save</button>
+                    </div><br><br>
+                    <br>
+                    <br>
+                    <div class="select">
+                        <div class="options">
+                            <p><b>show</b></p>
+                            <select name="" id="" style="height: 30px; width:50px;">
+                                <option value="">10</option>
+                                <option value="">15</option>
+                                <option value="">20</option>
+                            </select>
+                            <p><b>Entries</b></p>
+                        </div>
+                        <div>
+                            <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                        </div>
+                    </div>
+                    <table class="table table-bordered" style="width:900px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Contacts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in cmnctn %}
+                            <tr>
+                                <td><i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>&nbsp;<i
+                                        class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.First_name}}</td>
+                                <td>{{i.Mobile_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div>
+                    <div class="form-check">
+                        <h5>Message Type</h5>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                          Default radio
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Second default radio
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Second default radio
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Second default radio
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Second default radio
+                        </label>
+                      </div><br><hr>
+                      <textarea name="" id="" cols="60" rows="8"></textarea><br><br>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                          <h6>Send Whatsapp</h6>
+                        </label><br><br>
+                      </div>
+                      <label for="exampleFormControlFile1"></label>
+                      <input type="file" class="form-control-file"><br><hr>
+                      <button class="btn btn-primary">Send Sms</button>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+            const divsToToggle = document.querySelectorAll('.unit');
+
+            toggleButtons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('data-target');
+                    divsToToggle.forEach((div) => {
+                        div.classList.add('hidden');
+                    });
+                    const targetDiv = document.getElementById(targetId);
+                    if (targetDiv) {
+                        targetDiv.classList.remove('hidden');
+                    }
+                });
+            })
+        });
+    </script>
+</body>
+{% endblock %}
+
+</html>

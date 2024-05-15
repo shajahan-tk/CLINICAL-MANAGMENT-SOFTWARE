@@ -1,0 +1,179 @@
+{% extends "home.html" %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    .docinput {
+        width: 400px;
+        border-radius: .2rem;
+    }
+
+    .options {
+        display: flex;
+        gap: 5px;
+    }
+
+    .table {
+        position: relative;
+        width: 40%;
+    }
+
+    /* .search {
+        position: relative;
+        padding-left: 300px;
+        top: 70px;
+    } */
+
+    .container2{
+        padding: 20px;
+        background-color: rgb(243, 241, 241);
+        width:fit-content;
+        height: fit-content;
+        display: flex;
+        gap: 20px;
+        position: relative;
+        left: 300px;
+        top: 50px;
+        opacity: 0;
+        transition: opacity 0.8s ease-in;
+    }
+    .container3 {
+        position: relative;
+        top: 50px;
+        width: fit-content;
+        
+    }
+
+    .container2.show {
+        opacity: 1;
+       
+    }
+
+    input,
+    textarea {
+        width: 400px;
+        height: 35px;
+    }
+
+    .tb {
+        background-color: #fff;
+        width: fit-content;
+        padding: 20px;
+        width: 700px;
+        box-shadow: 0 0 20px black;
+
+    }
+
+    .select {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<body>
+    <div class="container2">
+        <div class="main">
+            <h3>Document Type</h3>
+            <div>
+                <label for="exampleInputEmail1" class="form-label">Title</label><br>
+                <input type="text" class="docinput" id="" placeholder="Title">
+                <br><br>
+                <label for="">Description</label>
+                <div class="col-md-12 offset-md-0">
+                    <!-- WP Editor -->
+                    <textarea id="wp-editor" name="textarea" cols="23"></textarea>
+                </div><br>
+                <label for="">Attachment</label>
+                <input type="file" name="attachment" id=""><br>
+                <hr>
+                <button type="button" class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp;Save</button>
+            </div>
+        </div>
+
+        <div class="tb">
+            <h4>List All Document Type</h4>
+            <br>
+            <br>
+            <div class="select">
+                <div class="options">
+                    <p><b>show</b></p>
+                    <select name="" id="" style="height: 30px; width:50px;">
+                        <option value="">10</option>
+                        <option value="">15</option>
+                        <option value="">20</option>
+                    </select>
+                    <p><b>Entries</b></p>
+                </div>
+                <div>
+                    <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                </div>
+            </div>
+            <table class="table table-bordered" style="width:630px;">
+                <thead>
+                    <tr>
+                        <th scope="col">Action</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">created at</th>
+                        <th scope="col">Added By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
+                        <td>Otto</td>
+                        <td>11/09/2023</td>
+                        <td>11/10/2024</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
+                        <td>Thornton</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
+                        <td>Thornton</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <script>
+        // Initialize TinyMCE
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.container2');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+    </script>
+
+</body>
+{% endblock %}
+
+</html>

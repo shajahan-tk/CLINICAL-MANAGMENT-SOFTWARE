@@ -1,0 +1,805 @@
+{% extends "home.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <style>
+        .head {
+            display: flex;
+            gap: 30px;
+        }
+
+        .maindiv {
+            display: flex;
+            gap: 20px;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 400px;
+            height: 35px;
+        }
+
+        table {
+            width: 1000px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .full {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            gap: 10px;
+            background-color: #fdfdfd;
+
+        }
+
+        .card {
+            width: 260px;
+        }
+
+
+
+        .container1 {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+
+        }
+
+        .fullcontainer {
+            background-color: rgb(243, 241, 241);
+            padding: 10px;
+            width: fit-content;
+            position: relative;
+            margin-left: 200px;
+            margin-top: 50px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+
+        }
+
+        .fullcontainer.show {
+            opacity: 1;
+            /* Fully visible */
+        }
+
+        .select {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .options {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tb {
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 20px black;
+        }
+
+        #subheadings {
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        #main1,
+        #main2 {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px black;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fullcontainer">
+        <div class="head" style="width: 18rem;">
+            <div class="card">
+                <ul class="list-group list-group-flush" id="subheadings">
+                    <div>
+                        <a href="#" class="toggle-btn" data-target="main3">
+                            <li class="list-group-item">Appointment</li>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="toggle-btn" data-target="main11">
+                            <li class="list-group-item">ClinicNotes</li>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="toggle-btn" data-target="main4">
+                            <li class="list-group-item">Treatment</li>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="toggle-btn" data-target="main5">
+                            <li class="list-group-item">Invoice</li>
+                        </a>
+                    </div>
+                    <a href="#" class="toggle-btn" data-target="main6">
+                        <li class="list-group-item">Payment</li>
+                    </a>
+                    <a href="#" class="toggle-btn" data-target="main7">
+                        <li class="list-group-item">Prescription</li>
+                    </a>
+                    <a href="#" class="toggle-btn" data-target="main8">
+                        <li class="list-group-item">Attachment</li>
+                    </a>
+                    <a href="#" class="toggle-btn" data-target="main9">
+                        <li class="list-group-item">Sms</li>
+                    </a>
+                    <a href="#" class="toggle-btn" data-target="main10">
+                        <li class="list-group-item">Email</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <div class="full">
+
+            <div class="sections">
+         
+                <div class="main hidden" id="main2">
+
+                </div>
+                <div class="main " id="main3">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Booking Time</th>
+                                        <th scope="col">Appointment Fixed</th>
+                                        <th scope="col">Treatment</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main4">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Treatment</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Tax%</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main5">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Treatment</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Tax%</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Payment Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main6">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Reciept No</th>
+                                        <th scope="col">Received Amount</th>
+                                        <th scope="col">Invoice No</th>
+                                        <th scope="col">Treatments</th>
+                                        <th scope="col">Pay Mode</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Date</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main7">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Drug Name</th>
+                                        <th scope="col">Dosage</th>
+                                        <th scope="col">Frequency</th>
+                                        <th scope="col">Instruction</th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main8">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Files</th>
+                                        <th scope="col">File Size</th>
+                                        <th scope="col">File Extension</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main9">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Mobile No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Content</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main10">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                <div>
+                                    <input type="search" placeholder="Search">
+                                </div>
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Files</th>
+                                        <th scope="col">File Size</th>
+                                        <th scope="col">File Extension</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Otto</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Thornton</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="main hidden" id="main11">
+                    <div class="container1">
+
+
+                        <div class="tb">
+                            <div class="select">
+                                <div class="options">
+                                    <p><b>show</b></p>
+                                    <select name="" id="" style="height: 30px; width:50px;">
+                                        <option value="">10</option>
+                                        <option value="">15</option>
+                                        <option value="">20</option>
+                                    </select>
+                                    <p><b>Entries</b></p>
+                                </div>
+                                
+                            </div>
+                            <table class="table table-bordered" style="width:1350px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Patient name</th>
+                                        <th scope="col">Complaints</th>
+                                        <th scope="col">Observation</th>
+                                        <th scope="col">Investigations</th>
+                                        <th scope="col">Diagnosis</th>
+                                        <th scope="col">Form</th>
+                                        <th scope="col">Noted by :</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                                
+                            </table>
+                            <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+            const divsToToggle = document.querySelectorAll('.main');
+
+            toggleButtons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('data-target');
+
+                    // Hide all divs
+                    divsToToggle.forEach((div) => {
+                        div.classList.add('hidden');
+                    });
+
+                    // Show the targeted div
+                    const targetDiv = document.getElementById(targetId);
+                    if (targetDiv) {
+                        targetDiv.classList.remove('hidden');
+                    }
+                });
+            });
+
+            document.getElementById('switch-button').addEventListener('click', function () {
+                const table1 = document.getElementById('table1');
+                const table2 = document.getElementById('table2');
+
+                if (table1.classList.contains('hidden')) {
+                    table1.classList.remove('hidden');
+                    table2.classList.add('hidden');
+                } else {
+                    table1.classList.add('hidden');
+                    table2.classList.remove('hidden');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.fullcontainer');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+    </script>
+</body>
+{% endblock %}
+
+</html>

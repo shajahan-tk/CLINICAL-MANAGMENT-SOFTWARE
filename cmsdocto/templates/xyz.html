@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        .btns {
+            display: flex;
+            gap: 30px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .grp {
+            padding-left: 20px;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 20px;
+        }
+
+        input[type=text] {
+            width: 400px;
+            height: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .patient {
+            display: flex;
+            gap: 20px;
+        }
+        .invoice {
+            display: flex;
+            gap: 20px;
+        }
+        .billing {
+            display: flex;
+            gap: 20px;
+        }
+        .rec {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btns">
+        <a href="#" class="toggle-btn" data-target="main1">Patient Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="main2">Invoice Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="main3">Billing Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="main4">Rec Auto Numbering</a>
+    </div><hr>
+    <div class="grp">
+        <h4>Patient Auto Generation</h4><br>
+        <input type="checkbox"><label for="">Yes</label>
+        <input type="checkbox"><label for="">No</label>
+    </div><br>
+    <div class="container">
+       
+       
+        <div class="main" id="main1">
+            <div class="patient">
+                <div class="item1">
+                    <label for="">Patient ID Prefix</label><br>
+                    <input type="text" placeholder="PAT">
+                </div>
+                
+                <div class="item2">
+                    <label for="">Numeric only</label><br>
+                    <input type="text" placeholder="66">
+                </div>
+            </div>
+        </div>
+
+        <div class="main hidden" id="main2">
+            <div class="invoice">
+                <div class="item3">
+                    <label for="">Invoice ID Prefix</label><br>
+                    <input type="text" placeholder="INv">
+                </div>
+                <div class="item4">
+                    <label for="">Numeric only</label><br>
+                    <input type="text" placeholder="135">
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="main hidden" id="main3">
+            <div class="billing">
+                <div class="item5">
+                    <label for="">Billing ID Prefix</label><br>
+                    <input type="text" placeholder="BILL">
+                </div>
+                <div class="item6">
+                    <label for="">Numeric only</label><br>
+                    <input type="text" placeholder="72">
+                </div>
+            </div>
+        </div>
+
+        <div class="main hidden" id="main4">
+            <div class="rec">
+                <div class="item7">
+                    <label for="">Rec ID Prefix</label><br>
+                    <input type="text" placeholder="REC">
+                </div>
+                <div class="item8">
+                    <label for="">Numeric only</label><br>
+                    <input type="text" placeholder="54">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const divsToToggle = document.querySelectorAll('.main');
+
+        toggleButtons.forEach((button, index) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = button.getAttribute('data-target');
+
+                // Hide all divs
+                divsToToggle.forEach((div) => {
+                    div.classList.add('hidden');
+                });
+
+                // Show the targeted div
+                const targetDiv = document.getElementById(targetId);
+                if (targetDiv) {
+                    targetDiv.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

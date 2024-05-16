@@ -20,14 +20,20 @@ Welcome to the Clinical management software digitizes patient records, streamlin
 ## Features
 
 
-- *User Authentication:*
-  - Sign up and log in securely to access personalized content.
-  
-- *Gym Membership Page:*
-  - Easily sign up for gym memberships through a dedicated page.
+* Electronic Health Records (EHR): Centralizes patient information, including medical history, diagnoses, medications, and lab results.
 
-- *Workout Tracking:*
-  - Dynamically track and display workout details on the user's profile page.
+* Appointment Scheduling: Allows staff to efficiently manage patient appointments, reducing scheduling errors and optimizing clinic workflow.
 
-- *Image Gallery:*
-  - Explore a dynamic image gallery showcasing various aspects of fitness and wellness.
+* Billing and Invoicing: Streamlines the billing process by generating invoices, tracking payments, and managing insurance claims.
+
+* Inventory Management: Manages stock levels of medical supplies and medications, ensuring adequate supply while minimizing waste.
+
+* Reporting and Analytics: Provides insights into clinic performance, patient demographics, and financial metrics to support data-driven decision-making.
+
+* Integration Capabilities: Allows seamless integration with other healthcare systems, such as lab systems or pharmacy software, for enhanced interoperability.
+
+* Patient Portal: Offers a secure online platform for patients to access their medical records, schedule appointments, and communicate with healthcare providers.
+
+* Prescription Management: Facilitates electronic prescribing, medication reconciliation, and refill requests to improve medication management.
+
+* Secure Messaging: Enables secure communication between healthcare providers and patients, enhancing patient engagement and care coordination.

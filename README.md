@@ -18,7 +18,7 @@
 
 Welcome to the Clinical management software digitizes patient records, streamlines appointment scheduling, and manages billing, improving workflow efficiency and enhancing patient care. By automating routine tasks and centralizing information, it allows healthcare providers to focus more on delivering quality care. Overall, it modernizes and optimizes healthcare operations, benefiting both staff and patients.
 ## Features
-![Screenshot 2024-05-15 172351](https://github.com/shajahan-tk/CMS/assets/160703062/0159a95b-a530-4764-b9a6-4795cee6d402)
+![Screenshot 2024-05-16 134919](https://github.com/shajahan-tk/CMS/assets/160703062/6f3c7009-5291-42a8-96ee-960c3284fe2d)
 
 - *User Authentication:*
   - Sign up and log in securely to access personalized content.

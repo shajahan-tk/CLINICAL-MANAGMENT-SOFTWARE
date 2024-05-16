@@ -16,8 +16,7 @@
 
 ## Introduction
 
-Welcome to the Fitness Tracker Application, a web-based platform designed to help users manage their workouts, track gym memberships, and maintain a healthy lifestyle.
-
+Welcome to the Clinical management software digitizes patient records, streamlines appointment scheduling, and manages billing, improving workflow efficiency and enhancing patient care. By automating routine tasks and centralizing information, it allows healthcare providers to focus more on delivering quality care. Overall, it modernizes and optimizes healthcare operations, benefiting both staff and patients.
 ## Features
 
 - *User Authentication:*

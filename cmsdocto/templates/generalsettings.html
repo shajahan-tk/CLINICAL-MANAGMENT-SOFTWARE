@@ -96,48 +96,40 @@
             opacity: 1;
             /* Fully visible */
         }
-
         .select {
             display: flex;
             justify-content: space-between;
         }
-
         .options {
             display: flex;
             gap: 5px;
         }
-
         .tb {
             background-color: white;
             padding: 10px;
             box-shadow: 0 0 20px black;
         }
-
         #subheadings {
             display: flex;
             flex-direction: row;
 
         }
-
         #main1,
         #main2 {
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 20px black;
         }
-
         a {
             text-decoration: none;
             color: black;
         }
-
         .selectt {
             position: relative;
             display: flex;
             gap: 30px;
 
         }
-
         .maincheck{
             display: flex;
             justify-content: space-around;
@@ -146,7 +138,6 @@
             display: flex;
             gap: 30px;
         }
-      
     </style>
 </head>
 
@@ -467,15 +458,19 @@
                 <div class="main hidden" id="main3">
                     <div class="container1">
                         <div class="mainn">
+                            <form action="patientgrp" method="POST">
+                                {% csrf_token %}
+                            
                             <h5>Add New Patient Group</h5>
                             <div>
                                 <label for="exampleInputEmail1" class="form-label">Patient Group</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Patient Group">
+                                <input type="text" class="docinput" id="" placeholder="Patient Group" name="patientgroup">
                                 <br>
                                 <hr>
-                                <button type="button" class="btn btn-primary"><i
+                                <button type="submit" class="btn btn-primary"><i
                                         class="fa-solid fa-check"></i>&nbsp;Save</button>
                             </div>
+                        </form>
                         </div>
 
                         <div class="tb">
@@ -502,27 +497,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in ptnt %}
                                     <tr>
                                         <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Otto</td>
+                                        <td>{{i.patientgroup}}</td>
                                         <td><button
                                                 style="background-color:green; color: aliceblue; border: unset; border-radius: .2rem;">Active</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                        <td><button
-                                                style="background-color:green; color: aliceblue; border: unset; border-radius: .2rem;">Active</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                        <td><button
-                                                style="background-color:green; color: aliceblue; border: unset; border-radius: .2rem;">Active</button>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
+                         
 
 
                                 </tbody>
@@ -539,15 +523,19 @@
                 <div class="main hidden" id="main4">
                     <div class="container1">
                         <div class="main-m">
+                            <form action="medicalcondition" method="POST">
+                                {% csrf_token %}
+                            
                             <h5>Add New</h5>
                             <div>
                                 <label for="exampleInputEmail1" class="form-label">Medical Condition</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Medical Condition">
+                                <input type="text" class="docinput" id="" placeholder="Medical Condition" name="medicalcondition">
                                 <br>
                                 <hr>
-                                <button type="button" class="btn btn-primary"><i
+                                <button type="submit" class="btn btn-primary"><i
                                         class="fa-solid fa-check"></i>&nbsp;Save</button>
                             </div>
+                        </form>
                         </div>
 
                         <div class="tb">
@@ -574,27 +562,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in mdcl %}
                                     <tr>
                                         <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Diabaties</td>
-                                        <td><button
-                                                style="background-color:green; color: aliceblue; border: unset; border-radius: .2rem;">Active</button>
-                                        </td>
+                                        <td>{{i.medicalcondition}}</td>
+                                       
                                     </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Aasthma</td>
-                                        <td><button
-                                                style="background-color:red; color: aliceblue; border: unset; border-radius: .2rem;">Inactive</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Stroke</td>
-                                        <td><button
-                                                style="background-color:green; color: aliceblue; border: unset; border-radius: .2rem;">Active</button>
-                                        </td>
-                                    </tr>
+                                    {% endfor %}
+                                   
 
 
                                 </tbody>
@@ -611,17 +586,21 @@
                 <div class="main hidden" id="main5">
                     <div class="container1">
                         <div class="main-p">
+                            <form action="paymentmethod" method="POST">
+                                {% csrf_token %}
+                            
                             <h5> Add Payment Method</h5>
                             <div>
                                 <label for="exampleInputEmail1" class="form-label">Payment Method</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Payment Method">
+                                <input type="text" class="docinput" id="" placeholder="Payment Method" name="paymentmethod">
                                 <br><br>
                                 <label for="">description</label><br>
-                                <textarea name="" id="" cols="26" rows="1"></textarea><br>
+                                <textarea id="" cols="26" rows="1" name="discription1"></textarea><br>
                                 <hr>
-                                <button type="button" class="btn btn-primary"><i
+                                <button type="submit" class="btn btn-primary"><i
                                         class="fa-solid fa-check"></i>&nbsp;Save</button>
                             </div>
+                        </form>
                         </div>
 
                         <div class="tb">
@@ -647,30 +626,19 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Action</th>
-                                        <th scope="col">Document Type</th>
+                                        <th scope="col">Payment Method</th>
                                         <th scope="col">Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in pymnt %}
                                     <tr>
                                         <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Otto</td>
-                                        <td>Paytm</td>
+                                        <td>{{i.Payment_method}}</td>
+                                        <td>{{i.discription}}</td>
                                     </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                        <td>Paytm</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                        <td>Paytm</td>
-
-                                    </tr>
-
-
+                                    {% endfor %}
+                        
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example" style=" position: relative;padding-left: 72%;">
@@ -685,15 +653,19 @@
                 <div class="main hidden" id="main6">
                     <div class="container1">
                         <div class="main-d">
+                            <form action="documenttype" method="POST">
+                                {% csrf_token %}
+                            
                             <h5>Document Type</h5>
                             <div>
                                 <label for="exampleInputEmail1" class="form-label">Document Type</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Document Type">
+                                <input type="text" class="docinput" id="" placeholder="Document Type" name="documenttype">
                                 <br>
                                 <hr>
-                                <button type="button" class="btn btn-primary"><i
+                                <button type="submit" class="btn btn-primary"><i
                                         class="fa-solid fa-check"></i>&nbsp;Save</button>
                             </div>
+                        </form>
                         </div>
 
                         <div class="tb">
@@ -723,18 +695,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in dcmt %}
                                     <tr>
                                         <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Otto</td>
+                                        <td>{{i.document_type}}</td>
                                     </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                    </tr>
+                                    {% endfor %}
+                                    
 
 
                                 </tbody>
@@ -751,17 +718,21 @@
                 <div class="main hidden" id="main7">
                     <div class="container1">
                         <div class="main-t">
+                            <form action="taxsettings" method="POST">
+                                {% csrf_token %}
+                            
                             <h5>Add Tax Name</h5>
                             <div>
                                 <label for="exampleInputEmail1" class="form-label">Tax Name</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Tax Name">
+                                <input type="text" class="docinput" id="" placeholder="Tax Name" name="taxname">
                                 <br><br>
                                 <label for="exampleInputEmail1" class="form-label">Tax Percentage</label><br>
-                                <input type="text" class="docinput" id="" placeholder="Tax Percentage %"><br>
+                                <input type="text" class="docinput" id="" placeholder="Tax Percentage %" name="taxpercentage"><br>
                                 <hr>
-                                <button type="button" class="btn btn-primary"><i
+                                <button type="submit" class="btn btn-primary"><i
                                         class="fa-solid fa-check"></i>&nbsp;Save</button>
                             </div>
+                        </form>
                         </div>
 
                         <div class="tb">
@@ -793,18 +764,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in taxstngs %}
                                     <tr>
                                         <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Otto</td>
+                                        <td>{{i.taxname}}</td>
+                                        <td>{{i.taxpercentage}}</td>
                                     </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i class="fa-solid fa-trash" style="color: #d41c40;"></i></td>
-                                        <td>Thornton</td>
-                                    </tr>
+                                    {% endfor %}
+                                    
 
 
                                 </tbody>
@@ -939,9 +906,7 @@
                                 <input type="search" placeholder="Search" style="width: 200px;">
                             </div><br>
                             <div>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#switchClinicModal">
-                                    <span class="link_name" style="color: blue;">Add New</span>
-                                  </a>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVaccinationModal">Add New</button>
                             </div><br>
                        
 
@@ -959,16 +924,7 @@
                                         <td>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                             <hr>
@@ -1174,28 +1130,7 @@
                                             Reffered By
                                         </label>
                                     </div>
-                                    <div class="modal fade" id="switchClinicModal" tabindex="-1" aria-labelledby="switchClinicModalLabel" aria-hidden="true" data-bs-backdrop="false">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="switchClinicModalLabel">Switch Clinic</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <label for="clinicSelect" class="form-label">Select Clinic:</label>
-                                                    <select class="form-select" id="clinicSelect">
-                                                        <option value="clinic1">Textbox</option>
-                                                        <option value="clinic2">Clinic 2</option>
-                                                        <!-- Add more clinic options as needed -->
-                                                    </select>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="button" class="btn btn-primary">Switch</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                                             checked>
@@ -1203,7 +1138,6 @@
                                             Specialization
                                         </label>
                                     </div>
-                                   
                                 </div>
                             </div>
                             <hr>
@@ -1212,19 +1146,47 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="addVaccinationModal" tabindex="-1" aria-labelledby="addVaccinationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addVaccinationModalLabel">Patient Registration Field</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="vaccinationForm">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="" name="">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <Select class="form-control">
+                                                <option value="Text Box">Text Box</option>
+                                                <option value="Drop Down">Drop Down</option>
+                                                <option value="Text Area">Text Area</option>
+                                                <option value="Check Box">Check Box</option>
+                                            </Select>
+                                        </div>  
+                                        <button type="button" class="btn btn-primary" id="addVaccineButton">Add</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="main hidden" id="main10">
-                    <div class="container1">
+                    <div class="container11">
 
                         <div class="btns">
-                            <a href="#" class="toggle-btn" data-target="mainn1">Patient Auto Numbering</a>
-                            <a href="#" class="toggle-btn" data-target="mainn2">Invoice Auto Numbering</a>
-                            <a href="#" class="toggle-btn" data-target="mainn3">Billing Auto Numbering</a>
-                            <a href="#" class="toggle-btn" data-target="mainn4">Rec Auto Numbering</a>
+                            <a href="#" class="toggle-btn1" data-target="mainn1">Patient Auto Numbering</a>
+                            <a href="#" class="toggle-btn1" data-target="mainn2">Invoice Auto Numbering</a>
+                            <a href="#" class="toggle-btn1" data-target="mainn3">Billing Auto Numbering</a>
+                            <a href="#" class="toggle-btn1" data-target="mainn4">Rec Auto Numbering</a>
                         </div><hr>
                         <div class="unit" id="mainn1">
                             <div class="patient">
                                 <div class="item1">
+                                    <h5>Patient Auto Numbering</h5><br>
                                     <label for="">Patient ID Prefix</label><br>
                                     <input type="text" placeholder="PAT">
                                 </div>
@@ -1232,48 +1194,82 @@
                                 <div class="item2">
                                     <label for="">Numeric only</label><br>
                                     <input type="text" placeholder="66">
-                                </div>
+                                </div><br>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <label for=""><b>Patient Auto ID Generation: &nbsp;</b></label>
+                                    <button type="button" class="btn btn-outline-success">Yes</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                  </div>
                             </div>
+                            <br>
+                            <button class="btn btn-primary">Save &nbsp;<i class="fa-solid fa-square-check"></i></button>
+
                         </div>
                 
                         <div class="unit hidden" id="mainn2">
                             <div class="invoice">
                                 <div class="item3">
+                                    <h5>Invoice Auto Numbering</h5><br>
                                     <label for="">Invoice ID Prefix</label><br>
                                     <input type="text" placeholder="INv">
                                 </div>
                                 <div class="item4">
                                     <label for="">Numeric only</label><br>
                                     <input type="text" placeholder="135">
-                                   
+                                    <br><br>
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <label for=""><b>Invoice Auto ID Generation: &nbsp;</b></label>
+                                        <button type="button" class="btn btn-outline-success">Yes</button>
+                                        <button type="button" class="btn btn-outline-danger">No</button>
+                                      </div>
                                 </div>
+                                <br>
+                                <button class="btn btn-primary">Save &nbsp;<i class="fa-solid fa-square-check"></i></button>
+    
                             </div>
                         </div>
                 
                         <div class="unit hidden" id="mainn3">
                             <div class="billing">
                                 <div class="item5">
+                                    <h5>Billing Auto Numbering</h5><br>
                                     <label for="">Billing ID Prefix</label><br>
                                     <input type="text" placeholder="BILL">
                                 </div>
                                 <div class="item6">
                                     <label for="">Numeric only</label><br>
                                     <input type="text" placeholder="72">
-                                </div>
+                                </div><br>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <label for=""><b>Receipt Auto ID Generation: &nbsp;</b></label>
+                                    <button type="button" class="btn btn-outline-success">Yes</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                  </div>
                             </div>
+                            <br>
+                            <button class="btn btn-primary">Save &nbsp;<i class="fa-solid fa-square-check"></i></button>
+
                         </div>
                 
                         <div class="unit hidden" id="mainn4">
                             <div class="rec">
                                 <div class="item7">
+                                    <h5>Rec Auto Numbering</h5><br>
                                     <label for="">Rec ID Prefix</label><br>
                                     <input type="text" placeholder="REC">
                                 </div>
                                 <div class="item8">
                                     <label for="">Numeric only</label><br>
                                     <input type="text" placeholder="54">
-                                </div>
+                                </div><br>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <label for=""><b>Rec Auto Numbering: &nbsp;</b></label>
+                                    <button type="button" class="btn btn-outline-success">Yes</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                  </div>
                             </div>
+                            <br>
+                            <button class="btn btn-primary">Save &nbsp;<i class="fa-solid fa-square-check"></i></button>
                         </div>
     
                     </div>
@@ -1287,7 +1283,13 @@
     </div>
     </div>
     <script>
-        const toggleButtons = document.querySelectorAll('.toggle-btn');
+         document.getElementById('addVaccineButton').addEventListener('click', function() {
+            // Get form values
+            const vaccineName = document.getElementById('vaccineName').value;
+            const vaccineRange = document.getElementById('vaccineRange').value;
+            const vaccineType = document.getElementById('vaccineType').value;
+        });
+        const toggleButtons = document.querySelectorAll('.toggle-btn1');
         const divsToToggle = document.querySelectorAll('.unit');
 
         toggleButtons.forEach((button, index) => {

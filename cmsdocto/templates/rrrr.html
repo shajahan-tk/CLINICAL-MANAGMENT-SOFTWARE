@@ -1,0 +1,277 @@
+{% extends "home.html" %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Poppins:wght@300&display=swap"
+    rel="stylesheet">
+</head>
+    <style>
+        .container-custom {
+            padding: 20px;
+            background-color: rgb(243, 241, 241);
+            width: fit-content;
+            height: fit-content;
+            position: relative;
+            left: 400px;
+            top: 200px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
+
+        .main,
+        .main1 {
+            background-color: #fff;
+            box-shadow: 0 0 20px black;
+            width: fit-content;
+            padding: 20px;
+        }
+
+        .main2 {
+            display: flex;
+            gap: 20px;
+        }
+
+        .select {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+        }
+
+        .options p {
+            margin: 0 10px;
+        }
+
+       
+
+        .main2 {
+            padding: 20px;
+            border-radius: .5rem;
+            box-shadow: 0 0 20px rgb(104, 103, 103);
+            position: relative;
+            bottom: 20px;
+        }
+    </style>
+<body>
+    <div class="container-custom" id="myContainer">
+        <div class="unit hidden" id="unit">
+            <form action="rolesandprivileges" method="POST">
+                {% csrf_token %}
+                <div class="main">
+                    <h5>Category</h5>
+                    <button class="btn btn-primary">Add New</button>
+                    <div id="popupContainer1" class="main hidden" id="main2">
+                        <div class="main2">
+                            <div class="submain">
+                                <div class="select">
+                                    <div class="optionss">
+                                        <label for=""><b>Add New Role</b></label><br>
+                                        <select name="" id="" style="width: 300px;height: 40px;">
+                                            <option value="">Select Access</option>
+                                            <option value="">All Menu Access</option>
+                                            <option value="">Custom Menu Access</option>
+                                        </select><br><br>
+                                        <input type="text" placeholder="Role Name" style="width: 300px;">
+                                    </div>
+                                </div><br>
+                                <h6>Note</h6>
+                                <p>1: If you enable the module for an staff,
+                                    <br> it means staff will only see their related record of assigned module.<br>
+
+                                    2: If you check for a clinic view, it means clinic will be able to <br>see all
+                                    record of his/her clinic of assigned module.
+                                </p>
+                            </div>
+                            <div class="submain1">
+                                <input type="checkbox" name="" id="1">
+                                <label for="patients">Patients</label>
+
+                                <input type="checkbox" name="" id="2">
+                                <label for="staff">Staff</label>
+
+                                <input type="checkbox" name="" id="3">
+                                <label for="system">System</label>
+
+                                <br><br>
+
+                                <input type="checkbox" name="" id="4">
+                                <label for="topnotification">Top Notification</label>
+
+                                <input type="checkbox" name="" id="5">
+                                <label for="inventery">Inventery</label>
+
+                                <input type="checkbox" name="" id="6">
+                                <label for="clinicemr">Clinic EMR</label>
+
+                                <br><br>
+
+                                <input type="checkbox" name="" id="7">
+                                <label for="reports">Reports</label>
+
+                                <input type="checkbox" name="" id="8">
+                                <label for="accounts">Accounts</label>
+
+                                <input type="checkbox" name="" id="9">
+                                <label for="daybook">Day Book</label>
+
+                                <br><br>
+
+                                <input type="checkbox" name="" id="10">
+                                <label for="payeespayers">Payees payers</label>
+
+                                <input type="checkbox" name="" id="11">
+                                <label for="acountreports">Acount Reports</label>
+
+                                <br><br>
+
+                                <input type="checkbox" name="" id="12">
+                                <label for="quotemanager">Quote Manager</label>
+
+                                <input type="checkbox" name="" id="13">
+                                <label for="languagesettings">Language Settings</label>
+
+                                <br><br>
+                                <button class="btn btn-primary">save</button><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form><br>
+        </div>
+        <div class="main1">
+            <h4>List All Roles</h4>
+            <br>
+            <br>
+            <div class="select">
+                <div class="options">
+                    <p><b>Show</b></p>
+                    <select name="" id="" class="form-control" style="height: 40px; width: 70px;">
+                        <option value="">10</option>
+                        <option value="">15</option>
+                        <option value="">20</option>
+                    </select>
+                    <p><b>Entries</b></p>
+                </div>
+                <div>
+                    <input type="search" class="form-control" placeholder="Search" style="border-radius: .2rem;">
+                </div>
+            </div><br><br>
+            <table class="table table-bordered" style="width: 1000px; position: relative;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Action</th>
+                        <th scope="col">Role ID</th>
+                        <th scope="col">Role Name</th>
+                        <th>Menu Permission</th>
+                        <th>Added Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in phcat %}
+                    <tr>
+                        <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        window.onload = function () {
+            var container = document.getElementById('myContainer');
+            container.style.opacity = '1';
+        };
+
+        document.getElementById("addAppointmentBtn2").addEventListener("click", function () {
+            var popup = document.getElementById("popupContainer2");
+            if (popup.classList.contains("hidden")) {
+                popup.classList.remove("hidden");
+            } else {
+                popup.classList.add("hidden");
+            }
+        });
+        document.getElementById("addAppointmentBtn1").addEventListener("click", function () {
+            var popup = document.getElementById("popupContainer1");
+            if (popup.classList.contains("hidden")) {
+                popup.classList.remove("hidden");
+            } else {
+                popup.classList.add("hidden");
+            }
+        });
+        document.getElementById("addAppointmentBtn").addEventListener("click", function () {
+            var popup = document.getElementById("popupContainer");
+            if (popup.classList.contains("hidden")) {
+                popup.classList.remove("hidden");
+            } else {
+                popup.classList.add("hidden");
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+            const divsToToggle = document.querySelectorAll('.unit');
+
+            toggleButtons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('data-target');
+
+                    // Hide all divs
+                    divsToToggle.forEach((div) => {
+                        div.classList.add('hidden');
+                    });
+
+                    // Show the targeted div
+                    const targetDiv = document.getElementById(targetId);
+                    if (targetDiv) {
+                        targetDiv.classList.remove('hidden');
+                    }
+                });
+            })
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.container');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+
+
+    </script>
+</body>
+{% endblock %}
+
+</html>

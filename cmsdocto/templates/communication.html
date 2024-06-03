@@ -47,6 +47,13 @@
         display: flex;
         gap: 20px;
         padding: 20px;
+        opacity: 0;
+        transition: opacity 0.8s ease-in;
+        
+    }
+    .container.show {
+        opacity: 1;
+        /* Fully visible */
     }
 
     .unit {
@@ -55,8 +62,8 @@
         box-shadow: 0 0 20px rgb(104, 103, 103);
         width: fit-content;
         padding: 20px;
-
     }
+    
 
     .hidden {
         display: none;
@@ -375,6 +382,13 @@
                 });
             })
         });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.container');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+       
     </script>
 </body>
 {% endblock %}

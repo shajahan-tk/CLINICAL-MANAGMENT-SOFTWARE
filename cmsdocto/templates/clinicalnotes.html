@@ -44,15 +44,16 @@
     }
     .container{
         position: relative;
-        top: 120px;
-        background-color: gray;
-        padding: 30px;
+        top: 50px;
+        background-color: rgb(246, 246, 246);   
+             padding: 30px;
+        height: fit-content;
     }
     .main2{
-        position: relative;
-        padding: 20px;
-        padding-left: 0px;
         background-color: white;
+        padding: 30px;
+        border-radius: .5rem;
+        box-shadow: 0 0 20px rgb(104, 103, 103);
     }
     .options{
         display: flex;
@@ -75,9 +76,10 @@
     }
 </style>
 <body>
-    <h4>Clinic Notes</h4>
 
     <div class="container">
+        <h4>Clinic Notes</h4>
+        <br>
         <h5>Report Filters</h5>
 
         <div class="main1">
@@ -113,9 +115,8 @@
                 <button class="btn btn-secondary">Print</button>
 
             </div><br><br>
-            <div class="search">
-                <label for="">Search</label>
-                <input type="search" name="" id="" style="width: 180px;">
+            <div>
+                <input type="search" placeholder="Search" style="position: relative; left: 950px;">
             </div>
             <br>
             <table class="table table-bordered" style="width:1200px;">

@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <style>
-    .main {
+    /* .main {
         position: relative;
         width: fit-content;
         padding: 10px;
         background-color: rgb(211, 212, 210);
         height: fit-content;
-    }
+    } */
 
     .docinput {
         width: 400px;
@@ -52,18 +53,22 @@
         opacity: 0;
         transition: opacity 0.8s ease-in;
     }
+
     .container.show {
-      opacity: 1; /* Fully visible */
+        opacity: 1;
+        /* Fully visible */
     }
 
-    .main1,.main2{
+    .main1,
+    .main2 {
         background-color: #fff;
         box-shadow: 0 0 20px black;
         width: fit-content;
         padding: 20px;
 
     }
-    .unit{
+
+    .unit {
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -92,7 +97,7 @@
 
     input,
     textarea {
-        width: 400px;
+        width: 350px;
         height: 35px;
     }
 
@@ -100,6 +105,13 @@
         text-decoration: none;
         color: unset;
     }
+
+    .sub,
+    .sub1 {
+        display: flex;
+        gap: 10px;
+    }
+
 </style>
 
 <body>
@@ -127,329 +139,404 @@
                     </ul>
                 </div>
             </div>
-
-
-
-            <div class="unit" id="unit1">
-                <div class="main1">
-                    <h5>Add Supplier</h5>
-                    <input type="text" placeholder="Supplier Name">
-                    <input type="number" placeholder="Company Code"><br><br>
-                    <input type="text" placeholder="Company Name">
-                    <input type="text" placeholder="Contact Name"><br><br>
-                    <input type="email" placeholder="Email">
-                    <input type="text" placeholder="Web"><br><br>
-                    <input type="number" placeholder="Phone"><br><br>
-                    <textarea name="" id="" cols="26" rows="1"
-                        style="position: relative; top: 11px;">Address</textarea><br>
-                    <hr>
-                    <button class="btn btn-primary">Save</button>
-                </div>
-                <div class="main2">
-                    <h4>List All Supplier</h4>
-                    <br>
-
-                    <br>
-                    <div class="select">
-                        <div class="options">
-                            <p><b>show</b></p>
-                            <select name="" id="" style="height: 30px; width:50px;">
-                                <option value="">10</option>
-                                <option value="">15</option>
-                                <option value="">20</option>
-                            </select>
-                            <p><b>Entries</b></p>
+                <div class="unit" id="unit1">
+                    <form action="pharmacysupply" method="POST">
+                        {% csrf_token %}
+                        <div class="main1">
+                            <h5>Add Supplier</h5>
+                            <div class="sub">
+                                <div class="submain1">
+                                    <input type="text" placeholder="Supplier Name" name="Suppliername"><br><br>
+                                    <input type="number" placeholder="Company Code" name="companycode"><br><br>
+                                    <input type="text" placeholder="Contact Name" name="contactname"><br><br>
+                                    <input type="email" placeholder="Email" name="email"><br><br>
+                                </div>
+                                <div class="submain">
+                                    <input type="text" placeholder="Web" name="web"><br><br>
+                                    <input type="number" placeholder="Phone" name="phone"><br><br>
+                                    <textarea name="address" id="" cols="26" rows="1"
+                                        style="position: relative; top: 11px;" placeholder="Address"></textarea><br><br>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Save</button>
                         </div>
-                        <div>
-                            <input type="search" placeholder="Search">
+                    </form>
+                    <div class="main2">
+                        <h4>List All Supplier</h4>
+                        <br>
+
+                        <br>
+                        <div class="select">
+                            <div class="options">
+                                <p><b>show</b></p>
+                                <select name="" id="" style="height: 30px; width:50px;">
+                                    <option value="">10</option>
+                                    <option value="">15</option>
+                                    <option value="">20</option>
+                                </select>
+                                <p><b>Entries</b></p>
+                            </div>
+                            <div>
+                                <input type="search" placeholder="Search">
+                            </div>
                         </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Supplier Type</th>
+                                    <th scope="col">Company Code</th>
+                                    <th>Company Name</th>
+                                    <th>Contact Name</th>
+                                    <th>Email</th>
+                                    <th>Web</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in supplier %}
+                                <tr>
+                                    <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                    <td>{{i.suppilername}}</td>
+                                    <td>{{i.companycode}}</td>
+                                    <td>{{i.companyname}}</td>
+                                    <td>{{i.contactname}}</td>
+                                    <td>{{i.email}}</td>
+                                    <td>{{i.web}}</td>
+                                    <td>{{i.phone}}</td>
+                                    <td>{{i.address}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                            </ul>
+                        </nav>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Action</th>
-                                <th scope="col">Supplier Type</th>
-                                <th scope="col">Company Code</th>
-                                <th>Company Name</th>
-                                <th>Contact Name</th>
-                                <th>Email</th>
-                                <th>Web</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
-                            </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                        </ul>
-                    </nav>
                 </div>
-            </div>
-            <div class="unit hidden" id="unit2">
-                <div class="main1">
-                    <h5>Add Unit</h5>
-                    <input type="text" placeholder="unit"><br>
-                    <hr>
-                    <button class="btn btn-primary">Save</button>
-                </div>
-                <div class="main2">
-                    <h4>List All Unit</h4>
-                    <br>
-
-                    <br>
-                    <div class="select">
-                        <div class="options">
-                            <p><b>show</b></p>
-                            <select name="" id="" style="height: 30px; width:50px;">
-                                <option value="">10</option>
-                                <option value="">15</option>
-                                <option value="">20</option>
-                            </select>
-                            <p><b>Entries</b></p>
+                <div class="unit hidden" id="unit2">
+                    <form action="pharmacyunit" method="POST">
+                        {% csrf_token %}
+                        <div class="main1">
+                            <h5>Add Unit</h5>
+                            <input type="text" placeholder="unit" name="unit"><br>
+                            <hr>
+                            <button class="btn btn-primary">Save</button>
                         </div>
-                        <div>
-                            <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                    </form>
+                    <div class="main2">
+                        <h4>List All Unit</h4>
+                        <br>
+
+                        <br>
+                        <div class="select">
+                            <div class="options">
+                                <p><b>show</b></p>
+                                <select name="" id="" style="height: 30px; width:50px;">
+                                    <option value="">10</option>
+                                    <option value="">15</option>
+                                    <option value="">20</option>
+                                </select>
+                                <p><b>Entries</b></p>
+                            </div>
+                            <div>
+                                <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                            </div>
                         </div>
+                        <table class="table table-bordered" style="width: 600px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Unit</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in pharmacyunit %}
+                                <tr>
+                                    <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                    <td>{{i.unit}}</td>
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                            </ul>
+                        </nav>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Action</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
-                            </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                        </ul>
-                    </nav>
                 </div>
-            </div>
-            <div class="unit hidden" id="unit3">
-                <div class="main1">
-                    <h5>Add Item</h5>
-                    <input type="text" placeholder="Item Name">
-                    <input type="number" placeholder="Manufacture"><br><br>
-                    <input type="text" placeholder="Box Size">
-
-                    <input type="text" placeholder="Category"><br><br>
-                    <input type="email" placeholder="Purchase Rate">
-                    <input type="text" placeholder="Packing Size"><br><br>
-                    <input type="number" placeholder="Taxable">
-                    <input type="number" placeholder="Recorder Quantity"><br><br>
-                    <input type="number" placeholder="Is Batch No">
-                    <input type="number" placeholder="Sales Rate"><br><br>
-                    <input type="number" placeholder="Device Serial Number">
-                    <input type="number" placeholder="HSN Code"><br>
-                    <hr>
-                    <button class="btn btn-primary">Save</button>
-                </div>
-                <div class="main2">
-                    <h4>List All Items</h4>
-                    <br>
-
-                    <br>
-                    <div class="select">
-                        <div class="options">
-                            <p><b>show</b></p>
-                            <select name="" id="" style="height: 30px; width:50px;">
-                                <option value="">10</option>
-                                <option value="">15</option>
-                                <option value="">20</option>
-                            </select>
-                            <p><b>Entries</b></p>
+                <div class="unit hidden" id="unit3">
+                    <form action="pharmacyitems" method="POST">
+                        {% csrf_token %}
+                        <div class="main1">
+                            <h5>Add Item</h5>
+                            <div class="sub1">
+                                <div class="submain1">
+                                    <input type="text" placeholder="Item Name" name="item name"><br><br>
+                                    <input type="text" placeholder="Molecules" name="molecules"><br><br>
+                                    <input type="number" placeholder="Item Code" name="itemcode"><br><br>
+                                    <select name="formulation" id="formulation"
+                                        style="height: 35px;width: 350px;position: relative;">
+                                        <option value="manufature">Manufature</option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select><br><br>
+                                </div>
+                                <div class="submain2">
+                                    <select name="formulation" id=""
+                                        style="width: 350px;position: relative;height: 35px;">
+                                        <option value="Formulation">Formulation</option>
+                                        <option value="jhg">jhg</option>
+                                        <option value="jgity">jgity</option>
+                                        <option value="utu">utu</option>
+                                        <option value="kj">kj</option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select><br><br>
+                                    <select name="" id="" style="width: 350px;position: relative;height: 35px;">
+                                        <option value="unitfirst">Unit First</option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select><br><br>
+                                    <input type="number" placeholder="Convert Box" name="convertbox"><br><br>
+                                    <select name="" id="" style="width: 350px;position: relative; height: 35px;">
+                                        <option value="unitsecond">Unit Second</option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select> <br><br>
+                                </div>
+                                <div class="submain3">
+                                    <input type="number" placeholder="Taxable" name="taxable"><br><br>
+                                    <input type="number" placeholder="purchaserate" name="Purchase Rate"><br><br>
+                                    <input type="number" placeholder="Sales Rate" name="salesrate"><br><br>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Save</button>
                         </div>
-                        <div>
-                            <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                    </form>
+                    <div class="main2">
+                        <h4>List All Items</h4>
+                        <br>
+
+                        <br>
+                        <div class="select">
+                            <div class="options">
+                                <p><b>show</b></p>
+                                <select name="" id="" style="height: 30px; width:50px;">
+                                    <option value="">10</option>
+                                    <option value="">15</option>
+                                    <option value="">20</option>
+                                </select>
+                                <p><b>Entries</b></p>
+                            </div>
+                            <div>
+                                <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                            </div>
                         </div>
-                    </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Action</th>
-                                <th scope="col">Item Name</th>
-                                <th scope="col">Item Code</th>
-                                <th>Is Batch No</th>
-                                <th>Contact Name</th>
-                                <th>Category</th>
-                                <th>Manufacture</th>
-                                <th>Unit</th>
-                                <th>Purchase Rate</th>
-                                <th>Sales Rate</th>
-                                <th>Expiry Date</th>
-                                <th>Taxable</th>
-                                <th>Device Serial Number</th>
-                                <th>Status</th>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Item Name</th>
+                                    <th scope="col">Item Code</th>
+                                    <th>Is Batch No</th>
+                                    <th>Category</th>
+                                    <th>Manufacture</th>
+                                    <th>Unit</th>
+                                    <th>Purchase Rate</th>
+                                    <th>Sales Rate</th>
+                                    <th>Tax</th>
+                                    <th>Taxable</th>
+                                    <th>Status</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
-                            </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="unit hidden" id="unit4">
-                <div class="main1">
-                    <h5>Add Item</h5>
-                    <input type="text" placeholder="Item Name">
-                    <input type="number" placeholder="Manufacture">
-                    <textarea name="" id="" cols="30" rows="2"
-                        style="position: relative;top: 28px;">Description</textarea><br>
-                    <hr>
-
-                    <button class="btn btn-primary">Save</button>
-                </div>
-                <div class="main2">
-                <h4>List All Items</h4>
-                <br>
-
-                <br>
-                <div class="select">
-                    <div class="options">
-                        <p><b>show</b></p>
-                        <select name="" id="" style="height: 30px; width:50px;">
-                            <option value="">10</option>
-                            <option value="">15</option>
-                            <option value="">20</option>
-                        </select>
-                        <p><b>Entries</b></p>
-                    </div>
-                    <div>
-                        <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in phitem %}
+                                <tr>
+                                    <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                    <td>{{i.itemname}}</td>
+                                    <td>{{i.unit}}</td>
+                                    <td>{{i.batchno}}</td>
+                                    <td>{{i.category}}</td>
+                                    <td>{{i.manufacture}}</td>
+                                    <td>{{i.unit}}</td>
+                                    <td>{{i.purchase}}</td>
+                                    <td>{{i.salesrate}}</td>
+                                    <td>{{i.tax}}</td>
+                                    <td>{{i.taxable}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-                <table class="table table-bordered" >
-                    <thead>
-                        <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">Category Name</th>
-                            <th scope="col">Category Code</th>
-                            <th>Description</th>
-                            <th>Status</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
-                        </tr>
-
-
-
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example" >
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                    </ul>
-                </nav>
-            </div>
-            </div>
-            <div class="unit hidden" id="unit5">
-                <div class="main1">
-                    <h5>Add Manufacture</h5>
-                    <input type="text" placeholder="Manufacture">
-                    <input type="number" placeholder="Compony Code"><br><br>
-                    <input type="text" placeholder="Compony Name">
-                    <input type="text" placeholder="Contact Name"><br><br>
-                    <input type="email" placeholder="Email">
-                    <input type="text" placeholder="Web"><br><br>
-                    <input type="number" placeholder="Phone">
-                    <input type="Text" placeholder="Address"><br><hr>
-                    <button>Save</button>
-                </div>
-                <div class="main2">
-                <h4>List All Manufacture</h4>
-                <br>
-
-                <br>
-                <div class="select">
-                    <div class="options">
-                        <p><b>show</b></p>
-                        <select name="" id="" style="height: 30px; width:50px;">
-                            <option value="">10</option>
-                            <option value="">15</option>
-                            <option value="">20</option>
-                        </select>
-                        <p><b>Entries</b></p>
-                    </div>
-                    <div>
-                        <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                <div class="unit hidden" id="unit4">
+                    <form action="categories" method="POST">
+                        {% csrf_token %}
+                        <div class="main1">
+                            <h5>Category</h5>
+                            <input type="text" placeholder="Category Name" name="category">
+                            <input type="number" placeholder="Category Code" name="categorycode">
+                            <textarea name="description" id="" cols="30" rows="2" style="position: relative;top: 28px;"
+                                placeholder="description"></textarea><br><br>
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                    <div class="main2">
+                        <h4>List All Category</h4>
+                        <br>
+                        <br>
+                        <div class="select">
+                            <div class="options">
+                                <p><b>show</b></p>
+                                <select name="" id="" style="height: 30px; width:50px;">
+                                    <option value="">10</option>
+                                    <option value="">15</option>
+                                    <option value="">20</option>
+                                </select>
+                                <p><b>Entries</b></p>
+                            </div>
+                            <div>
+                                <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                            </div>
+                        </div>
+                        <table class="table table-bordered" style="width: 1000px;position: relative;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">Category Code</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in phcat %}
+                                <tr>
+                                    <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                    <td>{{i.itemname}}</td>
+                                    <td>{{i.manufacture}}</td>
+                                    <td>{{i.description}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">Manufacture</th>
-                            <th scope="col">Compony Code</th>
-                            <th>Compony Name</th>
-                            <th>Contact Name</th>
-                            <th>Email</th>
-                            <th>Web</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Status</th>
+                <div class="unit hidden" id="unit5">
+                    <form action="manufacture" method="POST">
+                        {% csrf_token %}
+                        <div class="main1">
+                            <h5>Add Manufacture</h5>
+                            <input type="text" placeholder="Manufacture" name="manufacture">
+                            <input type="number" placeholder="Compony Code" name="companycode"><br><br>
+                            <input type="text" placeholder="Compony Name" name="companyname">
+                            <input type="text" placeholder="Contact Name" name="contactname"><br><br>
+                            <input type="email" placeholder="Email" name="email">
+                            <input type="text" placeholder="Web" name="web"><br><br>
+                            <input type="number" placeholder="Phone" name="phone">
+                            <input type="Text" placeholder="Address" name="address"><br>
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                    <div class="main2">
+                        <h4>List All Manufacture</h4>
+                        <br>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                        <br>
+                        <div class="select">
+                            <div class="options">
+                                <p><b>show</b></p>
+                                <select name="" id="" style="height: 30px; width:50px;">
+                                    <option value="">10</option>
+                                    <option value="">15</option>
+                                    <option value="">20</option>
+                                </select>
+                                <p><b>Entries</b></p>
+                            </div>
+                            <div>
+                                <input type="search" placeholder="Search" style="border-radius: .2rem; border: unset;">
+                            </div>
+                        </div>
+                        <table class="table table-bordered" style="width: 500px;position: relative;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Manufacture</th>
+                                    <th scope="col">Compony Code</th>
+                                    <th>Compony Name</th>
+                                    <th>Contact Name</th>
+                                    <th>Email</th>
+                                    <th>Web</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
 
-                        </tr>
-
-
-
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                    </ul>
-                </nav>
-            </div>
-            </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in phman %}
+                                <tr>
+                                    <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                    <td>{{i.manufacture}}</td>
+                                    <td>{{i.companycode}}</td>
+                                    <td>{{i.companyname}}</td>
+                                    <td>{{i.contactname}}</td>
+                                    <td>{{i.email}}</td>
+                                    <td>{{i.web}}</td>
+                                    <td>{{i.phone}}</td>
+                                    <td>{{i.address}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
         </div>
     </div>
     <script>
@@ -475,12 +562,19 @@
                 });
             })
         });
-        document.addEventListener('DOMContentLoaded', function() {
-      var container = document.querySelector('.container');
-      setTimeout(function() {
-        container.classList.add('show');
-      }, 100); // Adding a slight delay to ensure the transition effect
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.container');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+        $(document).ready(function () {
+            $('#searchable-dropdown').select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
+        });
+
     </script>
 </body>
 {% endblock %}

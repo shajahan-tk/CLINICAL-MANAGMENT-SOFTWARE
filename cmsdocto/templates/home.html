@@ -1,633 +1,695 @@
-{% load static %}
-
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
-<html lang="en" dir="ltr">
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
 
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
-  <link rel="stylesheet" href="style.css">
-  <!-- Boxiocns CDN Link -->
-  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Side Navigation Bar in HTML CSS JavaScript</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <style>
-  /* Google Fonts Import Link */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  /* Import Google font - Poppins */
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
+  :root {
+    --white-color: #fff;
+    --blue-color: #4070f4;
+    --grey-color: #707070;
+    --grey-color-light: #aaa;
+  }
+
+  body {
+    background-color: #f6f6f6;
+    transition: all 0.5s ease;
+  }
+
+  body.dark {
+    background-color: #262626;
+  }
+
+  body.dark {
+    --white-color: #1b1b1b;
+    --blue-color: #fff;
+    --grey-color: #f2f2f2;
+    --grey-color-light: #aaa;
+  }
+
+  /* navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    z-index: 1000;
+    box-shadow: 0 0 2px var(--grey-color-light);
+  }
+
+  .logo_item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--blue-color);
+  }
+
+  .navbar img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .search_bar {
+    height: 47px;
+    max-width: 430px;
+    width: 100%;
+  }
+
+  .search_bar input {
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 18px;
+    outline: none;
+    background-color: var(--white-color);
+    color: var(--grey-color);
+    border: 1px solid var(--grey-color-light);
+    padding: 0 20px;
+  }
+
+  .navbar_content {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+  }
+
+  .navbar_content i {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--grey-color);
+  }
+
+  /* sidebar */
   .sidebar {
+    background-color: var(--white-color);
+    width: 260px;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 260px;
-    background: #1995AD;
+    padding: 80px 20px;
     z-index: 100;
+    overflow-y: scroll;
+    box-shadow: 0 0 1px var(--grey-color-light);
     transition: all 0.5s ease;
   }
 
   .sidebar.close {
-    width: 78px;
+    padding: 60px 0;
+    width: 80px;
   }
 
-  .sidebar .logo-details {
-    height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .sidebar .logo-details i {
-    font-size: 30px;
-    color: #fff;
-    height: 50px;
-    min-width: 78px;
-    text-align: center;
-    line-height: 50px;
-  }
-
-  .sidebar .logo-details .logo_name {
-    font-size: 22px;
-    color: #fff;
-    font-weight: 600;
-    transition: 0.3s ease;
-    transition-delay: 0.1s;
-  }
-
-  .sidebar.close .logo-details .logo_name {
-    transition-delay: 0s;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .sidebar .nav-links {
-    height: 100%;
-    padding: 30px 0 150px 0;
-    overflow: auto;
-  }
-
-  .sidebar.close .nav-links {
-    overflow: visible;
-  }
-
-  .sidebar .nav-links::-webkit-scrollbar {
+  .sidebar::-webkit-scrollbar {
     display: none;
   }
 
-  .sidebar .nav-links li {
+  .menu_content {
     position: relative;
-    list-style: none;
-    transition: all 0.4s ease;
   }
 
-  .sidebar .nav-links li:hover {
-    background: #96a897;
-  }
-
-  .sidebar .nav-links li .iocn-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .sidebar.close .nav-links li .iocn-link {
-    display: block
-  }
-
-  .sidebar .nav-links li i {
-    height: 50px;
-    min-width: 78px;
-    text-align: center;
-    line-height: 50px;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .sidebar .nav-links li.showMenu i.arrow {
-    transform: rotate(-180deg);
-  }
-
-  .sidebar.close .nav-links i.arrow {
-    display: none;
-  }
-
-  .sidebar .nav-links li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .sidebar .nav-links li a .link_name {
+  .menu_title {
+    margin: 15px 0;
+    padding: 0 20px;
     font-size: 18px;
-    font-weight: 400;
-    color: #fff;
-    transition: all 0.4s ease;
   }
 
-  .sidebar.close .nav-links li a .link_name {
-    opacity: 0;
-    pointer-events: none;
+  .sidebar.close .menu_title {
+    padding: 6px 30px;
   }
 
-  .sidebar .nav-links li .sub-menu {
-    padding: 6px 6px 14px 80px;
-    margin-top: -10px;
-    background: #1d1b31;
-    display: none;
-  }
-
-  .sidebar .nav-links li.showMenu .sub-menu {
-    display: block;
-  }
-
-  .sidebar .nav-links li .sub-menu a {
-    color: #fff;
-    font-size: 15px;
-    padding: 5px 0;
+  .menu_title::before {
+    color: var(--grey-color);
     white-space: nowrap;
-    opacity: 0.6;
-    transition: all 0.3s ease;
   }
 
-  .sidebar .nav-links li .sub-menu a:hover {
-    opacity: 1;
+  .menu_dahsboard::before {
+    content: "Dashboard";
   }
 
-  .sidebar.close .nav-links li .sub-menu {
+  .menu_editor::before {
+    content: "Editor";
+  }
+
+  .menu_setting::before {
+    content: "Setting";
+  }
+
+  .sidebar.close .menu_title::before {
+    content: "";
     position: absolute;
-    left: 100%;
-    top: -10px;
-    margin-top: 0;
-    padding: 10px 20px;
-    border-radius: 0 6px 6px 0;
-    opacity: 0;
-    display: block;
-    pointer-events: none;
-    transition: 0s;
+    height: 2px;
+    width: 18px;
+    border-radius: 12px;
+    background: var(--grey-color-light);
   }
 
-  .sidebar.close .nav-links li:hover .sub-menu {
-    top: 0;
-    opacity: 1;
-    pointer-events: auto;
-    transition: all 0.4s ease;
+  .menu_items {
+    padding: 0;
+    list-style: none;
   }
 
-  .sidebar .nav-links li .sub-menu .link_name {
-    display: none;
+  .navlink_icon {
+    position: relative;
+    font-size: 22px;
+    min-width: 50px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 6px;
   }
 
-  .sidebar.close .nav-links li .sub-menu .link_name {
-    font-size: 18px;
-    opacity: 1;
-    display: block;
+  .navlink_icon::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: calc(100% + 100px);
+    left: -20px;
   }
 
-  .sidebar .nav-links li .sub-menu.blank {
-    opacity: 1;
-    pointer-events: auto;
-    padding: 3px 20px 6px 16px;
-    opacity: 0;
-    pointer-events: none;
+  .navlink_icon:hover {
+    background: var(--blue-color);
   }
 
-  .sidebar .nav-links li:hover .sub-menu.blank {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .one {
-    width: 80%;
-    margin-left: 10%;
-    background-color: black;
-    height: 400px;
-  }
-
-  .sidebar .profile-details {
-    position: fixed;
-    bottom: 0;
-    width: 260px;
+  .sidebar .nav_link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: #081f08;
-    padding: 12px 0;
-    transition: all 0.5s ease;
-  }
-
-  .sidebar.close .profile-details {
-    background: none;
-  }
-
-  .sidebar.close .profile-details {
-    width: 78px;
-  }
-
-  .sidebar .profile-details .profile-content {
-    display: flex;
-    align-items: center;
-  }
-
-  .sidebar .profile-details img {
-    height: 52px;
-    width: 52px;
-    object-fit: cover;
-    border-radius: 16px;
-    margin: 0 14px 0 12px;
-    background: #1d1b31;
-    transition: all 0.5s ease;
-  }
-
-  .sidebar.close .profile-details img {
-    padding: 10px;
-  }
-
-  .sidebar .profile-details .profile_name,
-  .sidebar .profile-details .job {
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
+    width: 100%;
+    padding: 4px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--grey-color);
     white-space: nowrap;
   }
 
-  .sidebar.close .profile-details i,
-  .sidebar.close .profile-details .profile_name,
-  .sidebar.close .profile-details .job {
+  .sidebar.close .navlink {
     display: none;
   }
 
-  .sidebar .profile-details .job {
-    font-size: 12px;
+  .nav_link:hover {
+    color: var(--white-color);
+    background: var(--blue-color);
   }
 
-  body {
-    background-image: url(static/main.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  .sidebar.close .nav_link:hover {
+    background: var(--white-color);
   }
 
-  .home-section {
-    position: relative;
-    background-attachment: fixed;
-    /* height: 590vh; */
-    left: 260px;
-    width: calc(100% - 260px);
-    transition: all 0.5s ease;
-  }
-
-  .sidebar.close~.home-section {
-    left: 78px;
-    width: calc(100% - 78px);
-  }
-
-  .home-section .home-content {
-    height: 60px;
-    display: flex;
-    align-items: center;
-  }
-
-  .home-section .home-content .bx-menu,
-  .home-section .home-content .text {
-    color: #11101d;
-    font-size: 35px;
-  }
-
-  .home-section .home-content .bx-menu {
-    margin: 0 15px;
+  .submenu_item {
     cursor: pointer;
   }
 
-  .home-section .home-content .text {
-    font-size: 26px;
-    font-weight: 600;
+  .submenu {
+    display: none;
   }
 
-  @media (max-width: 420px) {
-    .sidebar.close .nav-links li .sub-menu {
+  .submenu_item .arrow-left {
+    position: absolute;
+    right: 10px;
+    display: inline-block;
+    margin-right: auto;
+  }
+
+  .sidebar.close .submenu {
+    display: none;
+  }
+
+  .show_submenu~.submenu {
+    display: block;
+  }
+
+  .show_submenu .arrow-left {
+    transform: rotate(90deg);
+  }
+
+  .submenu .sublink {
+    padding: 15px 15px 15px 52px;
+  }
+
+  .bottom_content {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 260px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .bottom {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    justify-content: space-around;
+    padding: 18px 0;
+    text-align: center;
+    width: 100%;
+    color: var(--grey-color);
+    border-top: 1px solid var(--grey-color-light);
+    background-color: var(--white-color);
+  }
+
+  .bottom i {
+    font-size: 20px;
+  }
+
+  .bottom span {
+    font-size: 18px;
+  }
+
+  .sidebar.close .bottom_content {
+    width: 50px;
+    left: 15px;
+  }
+
+  .sidebar.close .bottom span {
+    display: none;
+  }
+
+  .sidebar.hoverable .collapse_sidebar {
+    display: none;
+  }
+
+  #sidebarOpen {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    #sidebarOpen {
+      font-size: 25px;
+      display: block;
+      margin-right: 10px;
+      cursor: pointer;
+      color: var(--grey-color);
+    }
+
+    .sidebar.close {
+      left: -100%;
+    }
+
+    .search_bar {
       display: none;
     }
-  }
 
-  .baricon {
+    .sidebar.close .bottom_content {
+      left: -100%;
+    }
+  }
+  .mainnav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: var(--white-color);
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    
+    z-index: 1000;
+    box-shadow: 0 0 2px var(--grey-color-light);
 
   }
 
-  .stt {
-    position: relative;
-    left: 1000px;
-    top: -10px;
-    display: flex;
-  }
+
+  /* Dropdown Styles */
+.dropdown {
+  position: relative;
+ 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the trigger element */
+  right: 0; /* Align to the right */
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px 0;
+}
+
+.sub-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-menu li {
+  padding: 8px 16px;
+}
+
+.sub-menu li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.sub-menu li a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown i {
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+}
+section{
+  position: relative;
+  top: 50px;
+  padding-left: 50px;
+}
 </style>
 
 <body>
-
-  <div class="sidebar close">
-    <div class="logo-details">
-      <i>
-        <img src="{% static 'images/CRM.jpg'%}" width="50" height="50" class="rounded-circle img-fluid"></i>
-      <span class="logo_name">Doctosmart</span>
-
-    </div>
-    <ul class="nav-links">
-      <li>
-        <a href="{% url 'dash' %}">
-          <i class='bx bx-grid-alt'></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Dashboard</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="{% url 'newpatient1' %}">
-          <i class="fa-solid fa-plus" style="color: #f6f7f9;"></i>
-          <span class="link_name">Add Patient</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'newpatient1' %}">Add Patient</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="{% url 'appointment' %}">
-          <i class="fa-solid fa-calendar-days" style="color: #f1f2f4;"></i>
-          <span class="link_name">Appointments</span>
-          <span class="dropdown"></span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'appointment' %}">Appointments</a></li>
-        </ul>
-
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-collection'></i>
-            <span class="link_name">Settings</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Settings</a></li>
-          <li><a href="{% url 'ehrreports' %}">Reports</a></li>
-          <li><a href="{% url 'clinicsettings' %}">Clinic Settings</a></li>
-          <li><a href="{% url 'newpatient1' %}">Add Patient</a></li>
-          <li><a href="#">Add Appointments</a></li>
-          <li><a href="#">Clinic Analytics</a></li>
-          <li>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#switchClinicModal">
-              <span class="link_name">Switch Clinic</span>
-            </a>
-          </li>
-
-        </ul>
-      </li>
-
-      <li>
-        <a href="{% url 'todayappointment' %}">
-          <i class="fa-solid fa-calendar-check" style="color: #f2f2f3;"></i>
-          <span class="link_name">Today Appointments</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'todayappointment' %}">Today Appointments</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="{% url 'communication' %}">
-          <i class="fa-solid fa-tty" style="color: #f0f2f4;"></i>
-          <span class="link_name">Communication</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Communication</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="{% url 'search' %}">
-          <i class="fa-solid fa-magnifying-glass-plus" style="color: #f5f7fa;"></i>
-          <span class="link_name">Search Patient</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Search Patient</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="{% url 'telemedicine' %}">
-          <i class="fa-solid fa-prescription-bottle-medical" style="color: #f1f2f4;"></i>
-          <span class="link_name">Tele Medicine</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'telemedicine' %}">Tele Medicine</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="{% url 'website' %}">
-          <i class="fa-solid fa-hospital-user" style="color: #eeeff2;"></i>
-          <span class="link_name">Website Appointment</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'website' %}">Website Appointment</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="{% url 'reports' %}">
-            <i class="fa-solid fa-house-chimney-medical" style="color: #f2f4f8;"></i>
-            <span class="link_name">Clinic EMR</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'reports' %}">Clinic EMR</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="{% url 'ehrreports' %}">
-            <i class="fa-solid fa-house-chimney-medical" style="color: #f2f4f8;"></i>
-            <span class="link_name">EHR Report</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'ehrreports' %}">EHR Report</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="{% url 'billing' %}">
-            <i class="fa-regular fa-hospital" style="color: #f5f7f9;"></i>
-            <span class="link_name">Billing</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'billing' %}">Billing</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="{%url 'sickleave' %}">
-          <i class="fa-solid fa-bed" style="color: #eeeff2;"></i>
-          <span class="link_name">Sick Leave</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{%url 'sickleave' %}">Sick Leave</a></li>
-        </ul>
-      </li>
-      <li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='fa-solid fa-file-pen'></i>
-            <span class="link_name">Files</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Files</a></li>
-          <li><a href="{% url 'files' %}">Files</a></li>
-          <li><a href="{% url 'expireddoc' %}">Expired Documents</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-collection'></i>
-            <span class="link_name">Clinic Settings</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow'></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Clinic Settings</a></li>
-          <li><a href="{% url 'generalsettings' %}">General Settings</a></li>
-          <li><a href="{% url 'policies' %}">Clinic Policy</a></li>
-          <li><a href="{% url 'newpatient1' %}">Whatsapp Configuration</a></li>
-          <li><a href="{% url 'staff' %}">Staff Settings</a></li>
-          <li><a href="{% url 'emr' %}">EMR Settings</a></li>
-          <li><a href="{% url 'pharmacysettings' %}">Pharmacy Settings</a></li>
-          <li><a href="#">Laboratory Settings</a></li>
-          <li><a href="{% url 'dental' %}">Dental Lab Settings</a></li>
-          <li><a href="#">Templates</a></li>
-          <li><a href="#">specialization/Department</a></li>
-        </ul>
-      </li>
-      <div class="modal fade" id="switchClinicModal" tabindex="-1" aria-labelledby="switchClinicModalLabel"
-        aria-hidden="true" data-bs-backdrop="false">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="switchClinicModalLabel">Switch Clinic</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <label for="clinicSelect" class="form-label">Select Clinic:</label>
-              <select class="form-select" id="clinicSelect">
-                <option value="clinic1">Clinic 1</option>
-                <option value="clinic2">Clinic 2</option>
-                <!-- Add more clinic options as needed -->
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Switch</button>
-            </div>
-          </div>
-        </div>
+  <!-- navbar -->
+  <div class="mainnav">
+    <nav class="navbar">
+      <div class="logo_item">
+        <i class="bx bx-menu" id="sidebarOpen"></i>
+        <img src="static/logodoc.jpg" alt=""></i>Clinical Management Software
       </div>
 
+      <div class="search_bar">
+        <input type="text" placeholder="Search" />
+      </div>
 
-      <li>
-        <a href="{% url 'support' %}">
-          <i class='bx bx-support'></i>
-          <span class="link_name">Support</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="{% url 'support' %}">Support</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="profile-details">
-          <div class="profile-content">
-            <!--<img src="image/profile.jpg" alt="profileImg">-->
+      <div class="navbar_content">
+        
+        <div class="dropdown">
+          <i class='bx bx-customize'></i>
+          <div class="dropdown-content">
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Settings</a></li>
+              <li><a href="{% url 'ehrreports' %}">Reports</a></li>
+              <li><a href="{% url 'clinicsettings' %}">Clinic Settings</a></li>
+              <li><a href="{% url 'newpatient1' %}">Add Patient</a></li>
+              <li><a href="#">Add Appointments</a></li>
+              <li><a href="#">Clinic Analytics</a></li>
+              <li>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#switchClinicModal">
+                  <span class="link_name">Switch Clinic</span>
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="name-job">
-            <div class="profile_name">employee</div>
-            <div class="job">Software Developer</div>
-          </div>
-          <i class='bx bx-log-out'></i>
         </div>
-      </li>
-    </ul>
+        <i class='bx bx-sun' id="darkLight"></i>
+        <i class='bx bx-bell'></i>
+        <div class="dropdown">
+          <img src="images/profile.jpg" alt="" class="profile" />
+          <div class="dropdown-content">
+            <ul class="sub-menu">
+              <li><a class="link_name" href="{% url 'profile' %}">My Profile</a></li>
+              <li><a href="#">Policies</a></li>
+              <li><a href="{% url 'ehrreports' %}">Reports</a></li>
+              <hr>
+              <li><a href="#">Sign Out</a></li>
+             
+            </ul>
+          </div>
+      </div>
+    </nav>
   </div>
-  <section class="home-section">
-    <div class="home-content" style="background-color: #A1D6E2; ">
-      <i class='bx bx-menu' style='color:#1995AD;'></i>
-      <span class="text" style="color: #1995AD;">CLINICAL MANAGMENT SOFTWARE</span>
-      <div class="search" style="position: relative; padding-left: 45%; ">
-        <input type="search" placeholder="Search" style=" border: unset; height: 32px; width: 250px; ">
-      </div>&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class="baricon">
-        <i class="fa-solid fa-gear" style="position: relative;top: 10px;left: 10px;"></i>
-        <select name="menu" id="menu" style="width: 20px; height: 34px; background-color: unset; border: unset;">
-          <option value="settings">&#9881; Settings</option>
-          <option value="reports">&#128202; Reports</option>
-          <option value="clinic_settings">&#9874; Clinic Settings</option>
-          <option value="add_appointment">&#128197; Add Appointment</option>
-      </select>
+
+  <!-- sidebar -->
+  <nav class="sidebar">
+    <div class="menu_content">
+      <ul class="menu_items">
+        
+        <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+        <!-- start -->
+       
+        <!-- end -->
+        <li class="item">
+          <a href="{% url 'dash' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-home-alt"></i>
+            </span>
+            <span class="navlink">Dashboard</span>
+            
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'newpatient1' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-plus'></i>
+            </span>
+            <span class="navlink">Add Patient</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'appointment' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-edit'></i>
+            </span>
+            <span class="navlink">Appointments</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'todayappointment' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-notepad'></i>
+            </span>
+            <span class="navlink">Today <br> Appointments</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'communication' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-chat'></i>
+            </span>
+            <span class="navlink">Communication</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'search' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-search-alt'></i>
+            </span>
+            <span class="navlink">Search Patient</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'telemedicine' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-message-add'></i>
+            </span>
+            <span class="navlink">Tele Medicine</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'website' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-calendar-plus'></i>
+            </span>
+            <span class="navlink">Website <br>Appointments</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'reports' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bxs-clinic'></i>
+            </span>
+            <span class="navlink">Clinic EMR</span>
+          </a>
+        </li>
+       
+        <li class="item">
+          <a href="{% url 'ehrreports' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bxs-duplicate'></i>
+            </span>
+            <span class="navlink">EHR Report</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{% url 'billing' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-money-withdraw'></i>
+            </span>
+            <span class="navlink">Billing</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="{%url 'sickleave' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-hotel'></i>
+            </span>
+            <span class="navlink">Sick Leave</span>
+          </a>
+        </li>
+        <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+        <!-- start -->
+        <li class="item">
+          <div href="" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-home-alt"></i>
+            </span>
+            <span class="navlink">Files</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+
+          <ul class="menu_items submenu">
+            <a href="{% url 'files' %}" class="nav_link sublink">Files</a>
+            <a href="{% url 'expireddoc' %}" class="nav_link sublink">Expired Document</a>
+          </ul>
+        </li>
+        <!-- end -->
+      </ul>
+      <ul class="menu_items">
+        <div class="menu_title menu_setting"></div>
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class='bx bx-brightness'></i>
+            </span>
+            <span class="navlink">Clinic Settings</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+
+          <ul class="menu_items submenu">
+            <a href="{% url 'generalsettings' %}" class="nav_link sublink">General Settings</a>
+            <a href="{% url 'policies' %}" class="nav_link sublink">Clinic Policy</a>
+            <a href="{% url 'newpatient1' %}" class="nav_link sublink">Whatsapp <br>Configuration</a>
+            <a href="{% url 'staff' %}" class="nav_link sublink">Staff Settings</a>
+            <a href="{% url 'emrsettings' %}" class="nav_link sublink">EMR Settings</a>
+            <a href="{% url 'pharmacysettings' %}" class="nav_link sublink">Pharmacy <br>Settings</a>
+            <a href="{% url 'vacination' %}" class="nav_link sublink">Vaccination</a>
+            <a href="{% url 'dental' %}" class="nav_link sublink">Dental Lab <br>Settings</a>
+            <a href="#" class="nav_link sublink">Templates</a>
+            <a href="#" class="nav_link sublink">Specialization <br>/Departments</a>
+
+          </ul>
+        </li>
+      </ul><hr>
+      <ul class="menu_items">
+        <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+        <!-- start -->
+        <!-- end -->
+        <li class="item">
+          <a href="{% url 'support' %}" class="nav_link">
+            <span class="navlink_icon">
+              <i class='bx bx-support'></i>
+            </span>
+            <span class="navlink">Support</span>
+            
+          </a>
+        </li>
+
+       
+      </ul>
       
 
-
+      <!-- Sidebar Open / Close -->
+      <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+          <span> Expand</span>
+          <i class='bx bx-log-in'></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+          <span> Collapse</span>
+          <i class='bx bx-log-out'></i>
+        </div>
       </div>
-
-
     </div>
-
-    {% block content %}
-    {% endblock %}
-  </section>
-
-
-
-
+  </nav>
+<section>
+  {% block content %}
+  {% endblock %}
+</section>
+  <!-- JavaScript -->
   <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-      arrow[i].addEventListener("click", (e) => {
-        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-        arrowParent.classList.toggle("showMenu");
-      });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("close");
+    const body = document.querySelector("body");
+    const darkLight = document.querySelector("#darkLight");
+    const sidebar = document.querySelector(".sidebar");
+    const submenuItems = document.querySelectorAll(".submenu_item");
+    const sidebarOpen = document.querySelector("#sidebarOpen");
+    const sidebarClose = document.querySelector(".collapse_sidebar");
+    const sidebarExpand = document.querySelector(".expand_sidebar");
+    sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+    sidebarClose.addEventListener("click", () => {
+      sidebar.classList.add("close", "hoverable");
+    });
+    sidebarExpand.addEventListener("click", () => {
+      sidebar.classList.remove("close", "hoverable");
     });
 
-    // JavaScript function to show popup message
-    function switchClinicPopup() {
-      // You can customize the message and styling here
-      alert("Switching clinic functionality is not implemented yet.");
+    sidebar.addEventListener("mouseenter", () => {
+      if (sidebar.classList.contains("hoverable")) {
+        sidebar.classList.remove("close");
+      }
+    });
+    sidebar.addEventListener("mouseleave", () => {
+      if (sidebar.classList.contains("hoverable")) {
+        sidebar.classList.add("close");
+      }
+    });
+
+    darkLight.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      if (body.classList.contains("dark")) {
+        document.setI
+        darkLight.classList.replace("bx-sun", "bx-moon");
+      } else {
+        darkLight.classList.replace("bx-moon", "bx-sun");
+      }
+    });
+
+    submenuItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("show_submenu");
+        submenuItems.forEach((item2, index2) => {
+          if (index !== index2) {
+            item2.classList.remove("show_submenu");
+          }
+        });
+      });
+    });
+
+    if (window.innerWidth < 768) {
+      sidebar.classList.add("close");
+    } else {
+      sidebar.classList.remove("close");
     }
   </script>
 </body>

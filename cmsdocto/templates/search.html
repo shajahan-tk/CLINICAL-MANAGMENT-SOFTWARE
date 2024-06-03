@@ -22,11 +22,11 @@
         rel="stylesheet">
 </head>
 <style>
-    .container{
+    .container {
         position: relative;
         padding: 20px;
         background-color: rgb(243, 241, 241);
-        height:fit-content;
+        height: fit-content;
         top: 50px;
 
 
@@ -51,7 +51,8 @@
         height: fit-content;
         background-color: white;
     }
-    table{
+
+    table {
         background-color: white;
         padding: 30px;
         border-radius: .5rem;
@@ -62,38 +63,34 @@
 
 <body>
     <div class="container">
-        <h4 style="position: relative;top: 30px;left: 10px;">Search patients</h4><br><br>
-
+        <h3>Search patients&nbsp;<i class="fa-solid fa-angles-right"></i></h3><br>
         <div class="main7">
-            
-                <div class="form1">
-
-                    <div class="form-group col-md-4">
-
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Status</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Doctor</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary "><b>Get</b></button>
-
+            <div class="form1">
+                <div class="form-group col-md-4">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Status</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
                 </div>
-                <br>
-                <br>
-                <div style="padding-inline: 30px;">
-                    <div class="table">
+                <div class="form-group col-md-4">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Doctor</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary "><b>Get</b></button>
+
+            </div>
+            <br>
+            <br>
+            <div style="padding-inline: 30px;">
+                <div class="table">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
@@ -108,32 +105,37 @@
                         <tbody>
                             {% for i in patient %}
                             <tr>
-                                <td><i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>&nbsp;<i
+                                <td><a href="{% url 'patientdetails' %}"><i class="fa-solid fa-pen-to-square" style="color: #000000;"></i></a>&nbsp;<i
                                         class="fa-solid fa-trash" style="color: #060606;"></i></td>
                                 <td>{{i.Doctor}}</td>
-                                <td>Name:{{i.First_name}}<br>Age:{{i.Age}} <br>Gender:{{i.Gender}} <br>Op no:{{i.Op_no}}</td>
-                                <td>contact:{{i.Mobile_no}} <br>Blood Group:{{i.Blood_group}} <br>City:{{i.City}} <br>Dob: {{i.Date_of_birth}} <br>Admission Date:{{..}}</td>
-                                
-                                
+                                <td>Name:{{i.First_name}}<br>Age:{{i.Age}} <br>Gender:{{i.Gender}} <br>Op
+                                    no:{{i.Op_no}}&nbsp; &nbsp;<a href="{% url 'opcard' %}">Outpatient
+                                        Treatment Card</a><br><a href="{% url 'consentform' %}">Consentlform</a><br><a
+                                        href="">Download Profile</a><br><a href="">Discharge Summary</a><br><a
+                                        href="{% url 'certificate' %}">Certificate Form</a><br></td>
+                                <td>contact:{{i.Mobile_no}} <br>Blood Group:{{i.Blood_group}} <br>City:{{i.City}}
+                                    <br>Dob: {{i.Date_of_birth}} <br>Admission Date:{{..}}</td>
+
+
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                </div>
-                <div class="pagination">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
+            </div>
+            <div class="pagination">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        
+
     </div>
 
 

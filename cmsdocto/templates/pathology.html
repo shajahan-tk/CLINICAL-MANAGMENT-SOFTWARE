@@ -33,9 +33,12 @@
         opacity: 0;
         transition: opacity 0.8s ease-in;
     }
+
     .container.show {
-      opacity: 1; /* Fully visible */
+        opacity: 1;
+        /* Fully visible */
     }
+
     .unit {
         display: flex;
         flex-direction: column;
@@ -43,11 +46,16 @@
         width: fit-content;
 
     }
-    .main1,.main2{
+
+    .main1,
+    .main2 {
         background-color: #fff;
         box-shadow: 0 0 20px black;
         padding: 20px;
+        width: 900px;
     }
+
+
     .hidden {
         display: none;
     }
@@ -56,21 +64,26 @@
         display: flex;
         justify-content: space-between;
     }
+
     .full {
         display: flex;
         flex-direction: row;
         gap: 30px;
     }
+
     .main2 {
         justify-content: center;
         gap: 20px;
+
     }
+
     input,
     textarea {
         width: 400px;
         height: 35px;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: unset;
     }
@@ -105,68 +118,83 @@
 
 
             <div class="unit" id="unit1">
-                <div class="main1">
-                    <h5>Add Report Header</h5><br>
-                    <input type="text" placeholder="Supplier Name"><br>
-                    <hr>
-                    <button>Save</button>
-                </div>
+                <form action="header" method="POST">
+                    {% csrf_token %}
+
+                    <div class="main1">
+                        <h5>Add Report Header</h5><br>
+                        <input type="text" placeholder="Supplier Name" name="suppliername" class="form-control"><br>
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
                 <div class="main2">
-                <h4>List All Header</h4>
-                <br>
+                    <h4>List All Header</h4>
+                    <br>
 
-                <br>
-                <div class="select">
-                    <div class="options">
-                        <p><b>show</b></p>
-                        <select name="" id="" style="height: 30px; width:50px;">
-                            <option value="">10</option>
-                            <option value="">15</option>
-                            <option value="">20</option>
-                        </select>
-                        <p><b>Entries</b></p>
+                    <br>
+                    <div class="select">
+                        <div class="options">
+                            <p><b>show</b></p>
+                            <select name="" id="" style="height: 30px; width:50px;">
+                                <option value="">10</option>
+                                <option value="">15</option>
+                                <option value="">20</option>
+                            </select>
+                            <p><b>Entries</b></p>
+                        </div>
+                        <div>
+                            <input type="search" placeholder="Search">
+                        </div>
                     </div>
-                    <div>
-                        <input type="search" placeholder="Search">
-                    </div>
+                    <table class="table table-bordered" style="width:870px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Header</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in header %}
+                            <tr>
+                                <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.suppliername}}</td>
+                            </tr>
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <table class="table table-bordered" style="width:800px;">
-                    <thead>
-                        <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                    </ul>
-                </nav>
-            </div>
             </div>
             <div class="unit hidden" id="unit2">
                 <div class="main1">
-                    <h5>Add Lab</h5><br>
-                    <input type="text" placeholder="Lab Name">
-                    <input type="text" placeholder="Lab Code"><br><br>
-                    <input type="text" placeholder="Company Name">
-                    <input type="text" placeholder="Contact Name">
-                    <br><br>
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="web"><br><br>
-                    <input type="text" placeholder="Phone"><br><br>
-                    <textarea name="" id="" cols="30" rows="5">Address</textarea><br>
-                    <hr>
-                    <button>Save</button>
+                    <form action="addlab" method="POST">
+                        {% csrf_token %}
+                        <h5>Add Lab</h5><br>
+                        <input type="text" placeholder="Lab Name" name="lab_name" id="lab_name">
+                        <input type="text" placeholder="Lab Code" name="lab_code" id="lab_code"
+                            ><br><br>
+                        <input type="text" placeholder="Company Name" name="company_name" id="company_name"
+                            >
+                        <input type="text" placeholder="Contact Name" name="contact_name" id="contact_name"
+                            >
+                        <br><br>
+                        <input type="email" placeholder="Email" name="email" id="email" >
+                        <input type="text" placeholder="web" name="web" id="web" ><br><br>
+                        <input type="text" placeholder="Phone" name="phone" id="phone" ><br><br>
+                        <textarea name="address" id="address" cols="" rows="" placeholder="Address"
+                            class="form-control"></textarea><br>
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
                 <div class="main2">
                     <h4>List All Lab Name</h4>
@@ -187,13 +215,14 @@
                             <input type="search" placeholder="Search">
                         </div>
                     </div>
-                    <table class="table table-bordered" style="width:800px;">
+                    <table class="table table-bordered" style="width:400px;">
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
                                 <th scope="col">Lab Name</th>
                                 <th scope="col">company Code</th>
                                 <th scope="col">company Name</th>
+                                <th scope="col">Contact Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Web</th>
                                 <th scope="col">Phone</th>
@@ -202,9 +231,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for i in addlab %}
                             <tr>
                                 <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.Lab_name}}</td>
+                                <td>{{i.Lab_code}}</td>
+                                <td>{{i.Company_name}}</td>
+                                <td>{{i.Contact_name}}</td>
+                                <td>{{i.Email}}</td>
+                                <td>{{i.Web}}</td>
+                                <td>{{i.Phone}}</td>
+                                <td>{{i.Address}}</td>
+                                <td></td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -217,20 +257,44 @@
             </div>
             <div class="unit hidden" id="unit3">
                 <div class="main1">
-                    <h5>Add Lab Test</h5><br>
-                    <input type="text" placeholder="Test No">
-                    <input type="number" placeholder="Test Description"><br><br>
-                    <input type="text" placeholder="Test Charges">
-                    <input type="text" placeholder="Carry out"><br><br>
-                    <input type="email" placeholder="Report">
-                    <input type="text" placeholder="Test Type"><br><br>
-                    <input type="number" placeholder="Report Head"><br>
-                    <hr>
-                    <button>Save</button>
+                    <form action="labtest" method="POST">
+                        {% csrf_token %}
+                        <h5>Add Lab Test</h5><br>
+                        <div class="mb-3">
+                            <input type="number" placeholder="Test No" class="form-control" name="test_no" id="test_no">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Test Description" class="form-control"
+                                name="test_description" id="test_description">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" placeholder="Test Charges" class="form-control" name="test_charge"
+                                id="test_charge">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Carry out" class="form-control" name="carry_out"
+                                id="carry_out">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" placeholder="Report" name="report" id="report"
+                                rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Test Type" class="form-control" name="test_type"
+                                id="test_type">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Report Head" class="form-control" name="report_head"
+                                id="report_head">
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
                 <div class="main2">
                     <h4>List All Lab Test</h4>
                     <br>
+
                     <br>
                     <div class="select">
                         <div class="options">
@@ -258,15 +322,22 @@
                                 <th>Report</th>
                                 <th>Test Type</th>
                                 <th>Status</th>
-
-
                             </tr>
                         </thead>
                         <tbody>
+                            {% for i in addlabtest %}
                             <tr>
                                 <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
+                                <td>{{i.Test_no}}</td>
+                                <td>{{i.Test_description}}</td>
+                                <td>{{i.Test_charge}}</td>
+                                <td>{{i.Carry_out}}</td>
+                                <td>{{i.Report}}</td>
+                                <td>{{i.Test_type}}</td>
+                                <td>{{i.Report_head}}</td>
+                                <td></td>
                             </tr>
+                            {% endfor %}
 
 
 
@@ -283,14 +354,25 @@
 
             <div class="unit hidden" id="unit4">
                 <div class="main1">
-                    <h5>Add Item</h5><br>
-                    <input type="text" placeholder="Item Name">
-                    <input type="number" placeholder="Manufacture">
-                    <textarea name="" id="" cols="30" rows="2"
-                        style="position: relative;top: 28px;">Description</textarea><br><br>
-                    <hr>
-
-                    <button>Save</button>
+                    <form action="additemlabtest" method="POST">
+                        {% csrf_token %}
+                        <h5>Add Item</h5><br>
+                        <div class="mb-3">
+                            <label for="item_name" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" placeholder="Item Name" name="item_name"
+                                id="item_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="manufacture_date" class="form-label">Manufacture Date</label>
+                            <input type="date" class="form-control" name="manufacture_date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" placeholder="Description" name="description" id="description"
+                                rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
                 <div class="main2">
                     <h4>Lab Test Package</h4>
@@ -308,17 +390,27 @@
                             <p><b>Entries</b></p>
                         </div>
                         <div>
-                            <input type="search" placeholder="Search" >
+                            <input type="search" placeholder="Search">
                         </div>
                     </div>
                     <table class="table table-bordered" style="width:800px;">
                         <thead>
                             <tr>
-                                <th scope="col">Package Name</th>
-                                <th scope="col">Lab Test</th>
-
-
+                                <th scope="col">Action</th>
+                                <th scope="col">Item name</th>
+                                <th scope="col">Manufacture Date</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
                             </tr>
+                            {% for i in items %}
+                            <tr>
+                                <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
+                                <td>{{i.Item_name}}</td>
+                                <td>{{i.Manufacture_date}}</td>
+                                <td>{{i.Description}}</td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
                         </thead>
                         <tbody>
                             <tr>
@@ -340,14 +432,18 @@
             </div>
             <div class="unit hidden" id="unit5">
                 <div class="main1">
-                    <h5>Add Lab Test Details</h5><br>
-                    <select name="" id="" style="width: 700px; height: 40px;">
-                        <option value="">Please Select Lab Test </option>
-                        <option value="1-CBC Blood Test">1-CBC Blood Test</option>
-                        <option value="1-Blood Test">1-Blood Test</option>
-                        <option value="1-CBC Blood Test">1-CBC Blood Test</option>
-                        <option value="1-Renal Fxn Test">1-Renal Fxn Test</option>
-                    </select>
+                    <form action="ladtestdetail" method="POST">
+                        {% csrf_token %}
+                        <h5>Add Lab Test Details</h5><br>
+                        <select name="labtest_detail" id="labtest_detail" class="form-control">
+                            <option value="">Please Select Lab Test </option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Blood Test">1-Blood Test</option>
+                            <option value="1-CBC Blood Test">1-CBC Blood Test</option>
+                            <option value="1-Renal Fxn Test">1-Renal Fxn Test</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -375,12 +471,12 @@
                 });
             })
         });
-        document.addEventListener('DOMContentLoaded', function() {
-      var container = document.querySelector('.container');
-      setTimeout(function() {
-        container.classList.add('show');
-      }, 100); // Adding a slight delay to ensure the transition effect
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.container');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
     </script>
 </body>
 {% endblock %}

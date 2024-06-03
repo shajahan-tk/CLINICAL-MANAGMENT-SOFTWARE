@@ -7,17 +7,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  <title>CMS | appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
   integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link
+  href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Poppins:wght@300&display=swap"
+  rel="stylesheet">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+    <!-- jQuery (required for AJAX requests) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .doctor-list {
+            float: left;
+            width: 200px;
+            position: relative;
+            left: 120px;
+            top: 50px;
+        }
+        .doctor-list a {
+            display: block;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            
+        }
+        .doctor-list a:hover {
+            background-color: #e0e0e0;
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 1000;
+        }
+        #modalBackdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
-  <h2>not done</h2>
+    <div class="doctor-list">
+        <a href="#" class="doctor-link" data-doctor="All" style="background-color: white;">All</a>
+        <a href="#" class="doctor-link" data-doctor="Dr. Smith" style="background-color: #3788D8;">Dr. Smith</a>
+        <a href="#" class="doctor-link" data-doctor="Dr. Johnson" style="background-color: #34A853;">Dr. Johnson</a>
+        <a href="#" class="doctor-link" data-doctor="Dr. Williams" style="background-color:#EA4335 ;">Dr. Williams</a>
+    </div>
+    <div id="calendar"></div>
+
+    <!-- Modal Backdrop -->
+    <div id="modalBackdrop"></div>
+
+    <!-- Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <h2>Add Appointment</h2>
+        <form id="appointmentForm">
+            <label for="appointmentTitle">Title:</label><br>
+            <input type="text" id="appointmentTitle" name="title" required><br><br>
+            <label for="appointmentStart">Start Time:</label><br>
+            <input type="datetime-local" id="appointmentStart" name="start" required><br><br>
+            <label for="appointmentEnd">End Time:</label><br>
+            <input type="datetime-local" id="appointmentEnd" name="end" required><br><br>
+            <label for="appointmentDoctor">Doctor:</label><br>
+            <select id="appointmentDoctor" name="doctor" required>
+                <option value="Dr. Smith">Dr. Smith</option>
+                <option value="Dr. Johnson">Dr. Johnson</option>
+                <option value="Dr. Williams">Dr. Williams</option>
+            </select><br><br>
+            <button type="button" id="saveButton">Save</button>
+            <button type="button" id="cancelButton">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Appointment Details Modal -->
+    <div id="detailsModal" class="modal">
+        <h2>Appointment Details</h2>
+        <p id="detailsTitle"></p>
+        <p id="detailsStart"></p>
+        <p id="detailsEnd"></p>
+        <p id="detailsDoctor"></p>
+        <button type="button" id="closeDetailsButton">Close</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var events = [];
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                selectable: true,
+                selectHelper: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                select: function(info) {
+                    openModal(info.startStr, info.endStr);
+                },
+                events: function(fetchInfo, successCallback, failureCallback) {
+                    var selectedDoctor = document.querySelector('.doctor-list .active')?.getAttribute('data-doctor') || 'All';
+                    var filteredEvents = events;
+                    if (selectedDoctor !== 'All') {
+                        filteredEvents = events.filter(event => event.extendedProps.doctor === selectedDoctor);
+                    }
+                    successCallback(filteredEvents);
+                },
+                eventClick: function(info) {
+                    displayDetails(info.event);
+                },
+                eventDisplay: 'block',
+                eventTextColor: '#FFFFFF',
+                eventColor: '#3788D8', // default event color
+                slotEventOverlap: false // Prevent events from overlapping
+            });
+
+            calendar.render();
+
+            // Function to save the appointment
+            function saveAppointment() {
+                var title = document.getElementById('appointmentTitle').value;
+                var start = document.getElementById('appointmentStart').value;
+                var end = document.getElementById('appointmentEnd').value;
+                var doctor = document.getElementById('appointmentDoctor').value;
+                var color;
+                switch (doctor) {
+                    case 'Dr. Smith':
+                        color = '#3788D8'; // Blue
+                        break;
+                    case 'Dr. Johnson':
+                        color = '#34A853'; // Green
+                        break;
+                    case 'Dr. Williams':
+                        color = '#EA4335'; // Red
+                        break;
+                    default:
+                        color = '#3788D8'; // Default color
+                }
+                if (title && start && end && doctor) {
+                    events.push({
+                        title: title + ' with ' + doctor,
+                        start: start,
+                        end: end,
+                        extendedProps: {
+                            doctor: doctor
+                        },
+                        color: color // Assigning color based on doctor
+                    });
+                    calendar.refetchEvents();
+                    closeModal();
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            }
+
+            // Function to open the modal
+            function openModal(start, end) {
+                document.getElementById('appointmentForm').reset();
+                document.getElementById('appointmentStart').value = start;
+                document.getElementById('appointmentEnd').value = end;
+                document.getElementById('appointmentModal').style.display = 'block';
+                document.getElementById('modalBackdrop').style.display = 'block';
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                document.getElementById('appointmentModal').style.display = 'none';
+                document.getElementById('modalBackdrop').style.display = 'none';
+            }
+
+            // Function to display details modal
+            function displayDetails(event) {
+                document.getElementById('detailsTitle').textContent = 'Title: ' + event.title;
+                document.getElementById('detailsStart').textContent = 'Start Time: ' + event.start
+                .toISOString().slice(0, 16).replace('T', ' ');
+                document.getElementById('detailsEnd').textContent = 'End Time: ' + event.end.toISOString().slice(0, 16).replace('T', ' ');
+                document.getElementById('detailsDoctor').textContent = 'Doctor: ' + event.extendedProps.doctor;
+                document.getElementById('detailsModal').style.display = 'block';
+                document.getElementById('modalBackdrop').style.display = 'block';
+            }
+
+            // Function to close details modal
+            function closeDetailsModal() {
+                document.getElementById('detailsModal').style.display = 'none';
+                document.getElementById('modalBackdrop').style.display = 'none';
+            }
+
+            // Event listeners for modal buttons
+            document.getElementById('saveButton').addEventListener('click', saveAppointment);
+            document.getElementById('cancelButton').addEventListener('click', closeModal);
+            document.getElementById('closeDetailsButton').addEventListener('click', closeDetailsModal);
+
+            // Event listener for doctor links
+            document.querySelectorAll('.doctor-link').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    document.querySelectorAll('.doctor-link').forEach(lnk => lnk.classList.remove('active'));
+                    this.classList.add('active');
+                    calendar.refetchEvents();
+                });
+            });
+
+            // Initially set the "All" doctor link as active
+            document.querySelector('.doctor-link[data-doctor="All"]').classList.add('active');
+        });
+    </script>
 </body>
 {% endblock %}
 </html>

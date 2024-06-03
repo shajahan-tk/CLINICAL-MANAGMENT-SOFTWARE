@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .container{
+        .container11{
             display: flex;
         }
         .btns {
@@ -59,20 +59,20 @@
 
 <body>
     <div class="btns">
-        <a href="#" class="toggle-btn" data-target="main1">Patient Auto Numbering</a>
-        <a href="#" class="toggle-btn" data-target="main2">Invoice Auto Numbering</a>
-        <a href="#" class="toggle-btn" data-target="main3">Billing Auto Numbering</a>
-        <a href="#" class="toggle-btn" data-target="main4">Rec Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="mainn1">Patient Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="mainn2">Invoice Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="mainn3">Billing Auto Numbering</a>
+        <a href="#" class="toggle-btn" data-target="mainn4">Rec Auto Numbering</a>
     </div><hr>
     <div class="grp">
         <h4>Patient Auto Generation</h4><br>
         <input type="checkbox"><label for="">Yes</label>
         <input type="checkbox"><label for="">No</label>
     </div><br>
-    <div class="container">
+    <div class="container11">
        
        
-        <div class="main" id="main1">
+        <div class="unit" id="mainn1">
             <div class="patient">
                 <div class="item1">
                     <label for="">Patient ID Prefix</label><br>
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="main hidden" id="main2">
+        <div class="unit hidden" id="mainn2">
             <div class="invoice">
                 <div class="item3">
                     <label for="">Invoice ID Prefix</label><br>
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="main hidden" id="main3">
+        <div class="unit hidden" id="mainn3">
             <div class="billing">
                 <div class="item5">
                     <label for="">Billing ID Prefix</label><br>
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <div class="main hidden" id="main4">
+        <div class="unit hidden" id="mainn4">
             <div class="rec">
                 <div class="item7">
                     <label for="">Rec ID Prefix</label><br>
@@ -129,7 +129,7 @@
 
     <script>
         const toggleButtons = document.querySelectorAll('.toggle-btn');
-        const divsToToggle = document.querySelectorAll('.main');
+        const divsToToggle = document.querySelectorAll('.unit');
 
         toggleButtons.forEach((button, index) => {
             button.addEventListener('click', (e) => {

@@ -163,8 +163,7 @@
                         <input type="text" placeholder="Session" name="Session"><br>
                         <hr>
 
-                        <button>Save</button>
-
+                        <button class="btn btn-primary">save</button><br><br>
                     </div>
                 </form>
                 <div class="main2">
@@ -192,7 +191,7 @@
                             <tr>
                                 <th scope="col">Action</th>
                                 <th scope="col">Procedure</th>
-                                <th scope="col">Changes</th>
+                                <th scope="col">Charges</th>
                                 <th>Duration</th>
                                 <th>Status</th>
 
@@ -226,7 +225,7 @@
                     <h5>Add Unit</h5>
                     <input type="text" placeholder="unit" name="unit"><br>
                     <hr>
-                    <button>Save</button>
+                    <button class="btn btn-primary">save</button><br><br>                
                 </div>
             </form>
                 <div class="main2">
@@ -252,19 +251,23 @@
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
-                                <th scope="col">Unit</th>
+                                <th scope="col">Drug Name</th>
+                                <th scope="col">Generic Name</th>
+                                <th scope="col">Frequency</th>
+                                <th scope="col">Drug Dosage</th>
+                                <th scope="col">Instructions</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in druglist %}
+                           
                             <tr>
                                 <td><i class="fa-regular fa-pen-to-square"></i>&nbsp;<i class="fa-solid fa-trash"
                                     style="color: #060606;"></i></td>
-                                <td>{{i.unit}}</td>    
+                                <td></td>    
 
                             </tr>
-                            {% endfor %}
+                           
 
 
 
@@ -284,20 +287,8 @@
                 <div class="main1">
                     <h5>Add Item</h5>
                     <input type="text" placeholder="Item Name" name="item name">
-                    <input type="text" placeholder="Manufacture" name="manufacture">
-                    <input type="number" placeholder="Box Size" name="box size"><br>
-                    <br>
-                    <input type="text" placeholder="Category" name="category">
-                    <input type="number" placeholder="Purchase Rate" name="purchase">
-                    <input type="number" placeholder="Packing Size" name="packingsize"><br><br>
-                    <input type="number" placeholder="Taxable" name="taxable">
-                    <input type="number" placeholder="Recorder Quantity" name="recorder">
-                    <input type="number" placeholder="Batch No" name="batchno"><br><br>
-                    <input type="number" placeholder="Sales Rate" name="salesrate">
-                    <input type="number" placeholder="Device Serial Number" name="deviceserialsnumber">
-                    <input type="number" placeholder="HSN Code" name="hsncode"><br>
-                    <hr>
-                    <button>Save</button>
+                    
+                    <button class="btn btn-primary">Save</button>
                 </div>
             </form>
                 <div class="main2">
@@ -323,46 +314,20 @@
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
-                                <th scope="col">Item Name</th>
-                                <th scope="col">Item Code</th>
-                                <th>Is Batch No</th>
-                                <th>Contact Name</th>
-                                <th>Category</th>
-                                <th>Manufacture</th>
-                                <th>Unit</th>
-                                <th>Purchase Rate</th>
-                                <th>Sales Rate</th>
-                                <th>Expiry Date</th>
-                                <th>Taxable</th>
-                                <th>Device Serial Number</th>
-                                <th>Status</th>
+                                <th scope="col">Complaints</th>
+                                <th scope="col">Status</th>
+                                
 
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for i in complaints %}
+                        <tbody>    
                             <tr>
                                 <td><i class="fa-regular fa-pen-to-square"></i>&nbsp;<i class="fa-solid fa-trash"
                                     style="color: #060606;"></i></td>
-                                <td>{{i.itemname}}</td>    
-                                <td>{{i.manufacture}}</td>    
-                                <td>{{i.boxsize}}</td>    
-                                <td>{{i.category}}</td>    
-                                <td>{{i.purchase}}</td>    
-                                <td>{{i.packingsize}}</td>    
-                                <td>{{i.taxable}}</td>    
-                                <td>{{i.recorder}}</td>   
-                                <td>{{i.batchno}}</td>   
-                                <td>{{i.salesrate}}</td>   
-                                <td>{{i.deviceserialsnumber}}</td>   
-                                <td>{{i.hsncode}}</td>   
-                                 
-
+                                <td></td>    
+                                <td></td>    
+                                <td></td>    
                             </tr>
-                            {% endfor %}
-
-
-
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -380,7 +345,7 @@
                     <h5>Add Observation</h5>
                     <input type="text" placeholder="Observation" name="observation"><br>
                     <hr>
-                    <button>Save</button>
+                    <button class="btn btn-primary">Save</button>
                 </div>
             </form>
                 <div class="main2">
@@ -438,7 +403,7 @@
                     <input type="text" placeholder="Diagnosis" name="diagnosis"><br><br>
                     <input type="text" placeholder="Diagnosis Code" name="diagnosiscode"><br>
                     <hr>
-                    <button>Save</button>
+                    <button class="btn btn-primary">Save</button>
                 </div>
             </form>
                 <div class="main2">
@@ -493,12 +458,12 @@
             </div>
             <div class="unit hidden" id="unit6">
                 <form action="investigation" method="POST">
-                    {% csrf_token %} %
+                    {% csrf_token %} 
                 <div class="main1">
                     <h5>Add Investigation</h5>
                     <input type="text" placeholder="Investigations" name="investigation"><br>
                     <hr>
-                    <button>Save</button>
+                    <button class="btn btn-primary">Save</button>
                 </div>
             </form>
                 <div class="main2">
@@ -547,7 +512,6 @@
                     </nav>
                 </div>
             </div>
-
             <div class="unit hidden" id="unit10">
                 <form action="frequency" method="POST">
                     {% csrf_token %}
@@ -556,7 +520,7 @@
                     <h5>Add New Frequency</h5>
                     <input type="text" placeholder="Frequency" name="frequency"><br>
                     <hr>
-                    <button>Save</button>
+                    <button class="btn btn-primary">save</button><br><br>               
                 </div>
             </form>
                 <div class="main2">
@@ -593,7 +557,6 @@
                 <div class="main2">
                     <h4>Treatment Package</h4>
                     <br>
-
                     <br>
                     <button id="addAppointmentBtn1" class="btn btn-primary">Add New</button>
                     <br>
@@ -603,7 +566,6 @@
                             <div class="select">
                                 <div class="optionss">
                                     <label for=""><b>Treatment List</b></label><br>
-
                                    <select name="" id="" style="width: 600px;height: 40px;">
                                     <option value="">abc</option>
                                     <option value="">scccs</option>
@@ -791,8 +753,6 @@
                                 </div>
                             </div><br>
                             <button class="btn btn-primary">save</button><br><br>
-
-
                         </div>
                     </div>
                     <select name="" id="" style="height: 40px;width: 600px;">
@@ -819,8 +779,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
-                                <th scope="col">Package Name</th>
-                                <th scope="col">Prescription Name</th>
+                                <th scope="col">Field Name</th>
+                                <th scope="col">Field Type</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -46,7 +46,7 @@
         display: flex;
         gap: 20px;
         padding: 20px;
-        background-color: rgb(243, 241, 241) ;
+        background-color: rgb(246, 246, 246);
         position: relative;
         top: 50px;
         opacity: 0;
@@ -107,10 +107,9 @@
                     </ul>
                 </div>
             </div>
-
-
-
             <div class="unit" id="unit1">
+                <form action="dentalwork" method="POST">
+                    {%csrf_token %}
                 <div class="main2">
                     <h5>Dental Work</h5>
                     <input type="text" placeholder="Work Name" name="workname">
@@ -119,6 +118,7 @@
                     <input type="text" placeholder="Alloy Type" name="alloytype"><br><hr>
                     <button class="btn btn-primary">Save</button>
                 </div><br><br>
+            </form>
                 <h4>List All Dental Work</h4>
                 <br>
 
@@ -149,10 +149,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for i in dentalwork %}
                         <tr>
                             <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
+                            <td>{{i.Workname}}</td>
+                            <td>{{i.Shade}}</td>
+                            <td>{{i.Worktype}}</td>
+                            <td>{{i.Alloytype}}</td>
                         </tr>
+                        {% endfor %}
 
 
 
@@ -166,15 +171,19 @@
                 </nav>
             </div>
             <div class="unit hidden" id="unit2">
+                <form action="addlaboratories" method="POST">
+                    {%csrf_token %}
+                
                 <div class="main2">
                     <h5>Add Laboratories</h5>
                     <input type="text" placeholder="Lab Name" name="labname">
                     <input type="text" placeholder="Lab Type" name="labtype"><br><br>
                     <input type="text" placeholder="Phone" name="phone">
-                    <input type="text" placeholder="Executive Name" name="excecutive"><br><br>
-                    <textarea name="address" id="" cols="30" rows="3">Address</textarea><br><hr>
+                    <input type="text" placeholder="Executive Name" name="executive"><br><br>
+                    <textarea name="address" id="" cols="30" rows="3" placeholder="Address"></textarea><br><hr>
                     <button class="btn btn-primary" style="position: relative; bottom: 15px;">Save</button>
                 </div><br><br>
+            </form>
                 <h4>List All Lab Name</h4>
                 <br>
 
@@ -198,23 +207,24 @@
                         <tr>
                             <th scope="col">Action</th>
                             <th scope="col">Lab Name</th>
-                            <th scope="col">company Code</th>
-                            <th scope="col">company Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Web</th>
+                            <th scope="col">Lab Type</th>
                             <th scope="col">Phone</th>
+                            <th scope="col">Executive Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for i in addlaboratory %}
                         <tr>
                             <td><i class="fa-solid fa-trash" style="color: #060606;"></i></td>
-
+                            <td>{{i.Labname}}</td>
+                            <td>{{i.Labtype}}</td>
+                            <td>{{i.Phone}}</td>
+                            <td>{{i.Executive}}</td>
+                            <td>{{i.Address}}</td>
                         </tr>
-
-
-
+                        {% endfor %}
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation example">

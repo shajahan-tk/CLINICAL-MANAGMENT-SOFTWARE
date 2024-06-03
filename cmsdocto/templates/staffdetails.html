@@ -1,0 +1,513 @@
+{% extends "home.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <style>
+        .head {
+            display: flex;
+            gap: 30px;
+        }
+
+        .maindiv {
+            display: flex;
+            gap: 20px;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 300px;
+            height: 35px;
+        }
+
+        table {
+            width: 1000px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .full {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            gap: 10px;
+            background-color: #fdfdfd;
+
+        }
+
+        .card {
+            width: 260px;
+        }
+
+
+
+        .container1 {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+
+        }
+
+        .fullcontainer {
+            background-color: rgb(243, 241, 241);
+            padding: 10px;
+            width: fit-content;
+            position: relative;
+            margin-left: 200px;
+            margin-top: 50px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+
+        }
+
+        .fullcontainer.show {
+            opacity: 1;
+            /* Fully visible */
+        }
+
+        .select {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .options {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tb {
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 20px black;
+        }
+
+        #subheadings {
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        #main1,
+        #main2 {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px black;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .selectt {
+            position: relative;
+            display: flex;
+            gap: 30px;
+
+        }
+
+        .maincheck{
+            display: flex;
+            justify-content: space-around;
+        }
+        .btns {
+            display: flex;
+            gap: 30px;
+        }
+        label{
+            font-size: bold;
+            font-weight: 600;
+            
+        }
+        .change{
+            display: flex;
+            gap: 10px;
+        }
+        .container1{
+        background-color: white;
+        padding: 30px;
+        border-radius: .5rem;
+        box-shadow: 0 0 20px rgb(104, 103, 103);   
+        }
+    
+      
+    </style>
+</head>
+
+<body>
+
+    <div class="fullcontainer">
+        <div class="head" style="width: 18rem;">
+            <div class="card">
+                <ul class="list-group list-group-flush" id="subheadings">
+                    <div>
+                        <a href="" class="toggle-btn" data-target="main1">
+                            <li class="list-group-item">General settings</li>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="" class="toggle-btn" data-target="main8">
+                            <li class="list-group-item">Profile Picture
+                            </li>
+                        </a>
+                    </div>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="full">
+            <div class="headings" style="width: 18rem;">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <a href="#" class="toggle-btn" data-target="main1">
+                            <li class="list-group-item"><i class="fa-solid fa-laptop"></i>Basic Information</li>
+                        </a>
+                        <a href="#" class="toggle-btn" data-target="main2">
+                            <li class="list-group-item"><i class="fa-solid fa-user"></i>Change Password</li>
+                        </a>
+                        <a href="#" class="toggle-btn" data-target="main3">
+                            <li class="list-group-item"><i class="fa-solid fa-hospital-user"></i>Login Access</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="sections">
+                <div class="main" id="main1">
+                    <h3>Basic Information</h3>
+                    <form action="clinic" method="POST">
+                        {% csrf_token %} 
+                    
+                    <div class="maindiv">
+                        <div class="form1">
+
+                            <label for="exampleFormControlSelect1">First Name</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="First_name"><br>
+
+                            <label for="exampleFormControlSelect1">Last Name</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="last_name"><br>
+
+                            <label for="exampleFormControlSelect1">Staff ID</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="staff_id"><br>
+
+                            <label for="exampleFormControlSelect1">User Name</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="user_name"><br>
+
+                            <label for="exampleFormControlSelect1">Date Of Joining</label><br>
+                            <input type="datetime" id="inputPassword2" placeholder="" name="date"><br>
+
+                            <label for="exampleFormControlSelect1">Email</label><br>
+                            <input type="email" id="inputPassword2" placeholder="" name="email"><br>
+
+                            <label for="exampleFormControlSelect1">Date Of Leaving</label><br>
+                            <input type="datetime" id="inputPassword2" placeholder="" name="dateofleaving"><br>
+
+                            <label for="exampleFormControlSelect1">Gender</label><br>
+                            <select id="exampleFormControlSelect1" name="default_language">
+                                <option>Please Select option</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Role</label><br>
+                            <select id="exampleFormControlSelect1" name="default_language">
+                                <option>Please Select option</option>
+                                <option></option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Staff Type</label><br>
+                            <select id="exampleFormControlSelect1" name="default_language">
+                                <option>Please Select option</option>
+                                <option></option>
+                            </select><br>
+
+                        </div>
+                        <div class="form2">
+
+                            <label for="exampleFormControlSelect1">Department</label><br>
+                            <select id="exampleFormControlSelect1" name="default_language">
+                                <option>Please Select option</option>
+                                <option></option>
+                            </select><br>
+
+
+                            <label for="exampleFormControlSelect1">Marital</label><br>
+                            <select id="exampleFormControlSelect1" name="state">
+                                <option>Please Select option</option>
+                                <option>Married</option>
+                                <option>Un Married</option>
+                            </select><br>
+
+
+                            <label for="exampleFormControlSelect1">Contact Number</label><br>
+                            <input type="number" id="inputPassword2" placeholder="" name="contact"><br>
+
+
+                            <label for="exampleFormControlSelect1">State</label><br>
+                            <select id="exampleFormControlSelect1" name="state">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">City</label><br>
+                            <input type="text" id="inputPassword2" placeholder="" name="city"><br>
+
+                            <label for="exampleFormControlSelect1">Status</label><br>
+                            <select id="exampleFormControlSelect1" name="status">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Date of Birth</label><br>
+                            <input type="datetime" id="inputPassword2" placeholder="" name="dateofbirth"><br><br>
+
+
+                            <label for="exampleFormControlSelect1">Zip Code</label><br>
+                            <input type="text" id="inputPassword2" placeholder="" name="zip"><br>
+
+                            <label for="exampleFormControlSelect1">Citenzenship</label><br>
+                            <select id="exampleFormControlSelect1" name="citenzenship">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Nationality</label><br>
+                            <select id="exampleFormControlSelect1" name="nationality">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <br>
+                        </div>
+                        <div class="form3">
+
+                            <label for="exampleFormControlSelect1">Blood Group</label><br>
+                            <select id="exampleFormControlSelect1" name="bloodgroup">
+                                <option>Please Select option</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>A+</option>
+                                <option>AB-</option>
+                                <option>AB+</option>
+                                <option>B-</option>
+                                <option>B+</option>
+                            </select><br>
+
+
+                            <label for="exampleFormControlSelect1">Consultation Fee</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="consultationfee"><br>
+
+
+                            <label for="exampleFormControlSelect1">Header</label><br>
+                            <input type="" id="inputPassword2" placeholder="" name="header"><br>
+
+
+                            <label for="exampleFormControlSelect1">Country</label><br>
+                            <select id="exampleFormControlSelect1" name="country">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Specialization</label><br>
+                            <select id="exampleFormControlSelect1" name="specialization">
+                                <option>Please Select option</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br>
+
+                            <label for="exampleFormControlSelect1">Address</label><br>
+                            <input type="text" id="inputPassword2" placeholder="" name="address"><br><br>
+
+                            
+                            <button class="btn btn-primary">Save</button>
+
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="main hidden" id="main2">
+                    <h3>Change Password</h3><br>
+                    <div class="change">
+                        <label for="">Old Password</label>
+                        <input type="text" placeholder="old password" name="old">
+                        <label for="">New Password</label>
+                        <input type="text" placeholder="new password" name="new">
+                        <label for="">Confirm Password</label>
+                        <input type="text" placeholder="confirm password" name="confirm">
+                    </div>
+                </div>
+                <div class="main hidden" id="main3">                    
+                    <h3>Login Access</h3><br><br>
+                    <div class="container1">
+                    <div class="login">
+                        <label for="">Is Access From IP</label><br>
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" class="btn btn-outline-success">Yes</button>
+                            <button type="button" class="btn btn-outline-danger">No</button>
+                          </div><br><br>
+                          <label for="">Access From IP</label><br>
+                          <input type="text" name="accessfrom" id="" placeholder="Is Access From IP">
+                    </div>
+                </div>
+            </div>
+            <div class="main hidden" id="main8">
+                <h4>Profile</h4>
+                <div class="containe">
+                    <label for="">Browse</label><br><br>
+                    <input type="file">
+                    <br><br><button class="btn btn-primary">Save</button>
+                </div>
+                <div class="modal fade" id="addVaccinationModal" tabindex="-1" aria-labelledby="addVaccinationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addVaccinationModalLabel">Patient Registration Field</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="vaccinationForm">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="" name="">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <Select class="form-control">
+                                            <option value="Text Box">Text Box</option>
+                                            <option value="Drop Down">Drop Down</option>
+                                            <option value="Text Area">Text Area</option>
+                                            <option value="Check Box">Check Box</option>
+                                        </Select>
+                                    </div>  
+                                    <button type="button" class="btn btn-primary" id="addVaccineButton">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+         document.getElementById('addVaccineButton').addEventListener('click', function() {
+            // Get form values
+            const vaccineName = document.getElementById('vaccineName').value;
+            const vaccineRange = document.getElementById('vaccineRange').value;
+            const vaccineType = document.getElementById('vaccineType').value;
+        });
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const divsToToggle = document.querySelectorAll('.unit');
+
+        toggleButtons.forEach((button, index) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = button.getAttribute('data-target');
+
+                // Hide all divs
+                divsToToggle.forEach((div) => {
+                    div.classList.add('hidden');
+                });
+
+                // Show the targeted div
+                const targetDiv = document.getElementById(targetId);
+                if (targetDiv) {
+                    targetDiv.classList.remove('hidden');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+            const divsToToggle = document.querySelectorAll('.main');
+
+            toggleButtons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('data-target');
+
+                    // Hide all divs
+                    divsToToggle.forEach((div) => {
+                        div.classList.add('hidden');
+                    });
+
+                    // Show the targeted div
+                    const targetDiv = document.getElementById(targetId);
+                    if (targetDiv) {
+                        targetDiv.classList.remove('hidden');
+                    }
+                });
+            });
+
+            document.getElementById('switch-button').addEventListener('click', function () {
+                const table1 = document.getElementById('table1');
+                const table2 = document.getElementById('table2');
+
+                if (table1.classList.contains('hidden')) {
+                    table1.classList.remove('hidden');
+                    table2.classList.add('hidden');
+                } else {
+                    table1.classList.add('hidden');
+                    table2.classList.remove('hidden');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.querySelector('.fullcontainer');
+            setTimeout(function () {
+                container.classList.add('show');
+            }, 100); // Adding a slight delay to ensure the transition effect
+        });
+    </script>
+</body>
+{% endblock %}
+
+</html>
